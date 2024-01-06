@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -11,11 +12,26 @@ namespace Binder
     public partial class Binder : Form
     {
         private List<ImageInfo> selectedImages = new List<ImageInfo>();
+        private BackgroundWorker backgroundWorker;
 
         public Binder()
         {
             InitializeComponent();
             ConfigureDataGridView();
+            InitializeBackgroundWorker();
+        }
+
+        private void InitializeBackgroundWorker()
+        {
+            backgroundWorker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+
+            backgroundWorker.DoWork += BackgroundWorker_DoWork;
+            backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
+            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
         }
 
         private void SelectFoldersButton_Click(object sender, EventArgs e)
@@ -30,25 +46,13 @@ namespace Binder
                     string selectedFolder = folderBrowserDialog.SelectedPath;
 
                     string[] imagePaths = Directory.GetFiles(selectedFolder, "*.*", SearchOption.AllDirectories)
-                                                   .Where(s => s.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
-                                                               s.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                                                               s.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase))
-                                                   .ToArray();
+                                                    .Where(s => s.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
+                                                                s.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                                                                s.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase))
+                                                    .Select(s => s.ToLower())
+                                                    .ToArray();
 
-                    foreach (string imagePath in imagePaths)
-                    {
-                        FileInfo fileInfo = new FileInfo(imagePath);
-                        selectedImages.Add(new ImageInfo
-                        {
-                            ImageId = selectedImages.Count + 1,
-                            ImageName = fileInfo.Name,
-                            ImageExtension = fileInfo.Extension,
-                            ImageSize = fileInfo.Length,
-                            ImagePath = imagePath
-                        });
-                    }
-
-                    UpdateDataGridView();
+                    ProcessImages(imagePaths);
                 }
             }
         }
@@ -62,21 +66,75 @@ namespace Binder
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    foreach (string filePath in openFileDialog.FileNames)
-                    {
-                        FileInfo fileInfo = new FileInfo(filePath);
-                        selectedImages.Add(new ImageInfo
-                        {
-                            ImageId = selectedImages.Count + 1,
-                            ImageName = fileInfo.Name,
-                            ImageExtension = fileInfo.Extension,
-                            ImageSize = fileInfo.Length,
-                            ImagePath = filePath
-                        });
-                    }
+                    string[] imagePaths = openFileDialog.FileNames;
 
-                    UpdateDataGridView();
+                    ProcessImages(imagePaths);
                 }
+            }
+        }
+
+        private void ProcessImages(string[] imagePaths)
+        {
+            foreach (string imagePath in imagePaths)
+            {
+                FileInfo fileInfo = new FileInfo(imagePath);
+                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.Name);
+
+                if (fileNameWithoutExtension.Contains('.'))
+                {
+                    DialogResult result = MessageBox.Show($"The base file name '{fileNameWithoutExtension}' contains multiple dots. Do you want to rename the file?", "Rename File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == DialogResult.Yes)
+                    {
+                        RenameFileAndAddToList(imagePath);
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Skipping file '{fileInfo.Name}'.", "Skipped File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    AddFileToList(imagePath);
+                }
+            }
+
+            UpdateDataGridView();
+        }
+
+        private void AddFileToList(string imagePath)
+        {
+            FileInfo fileInfo = new FileInfo(imagePath);
+            ImageInfo imageInfo = new ImageInfo
+            {
+                ImageId = selectedImages.Count + 1,
+                ImageName = fileInfo.Name,
+                ImageExtension = fileInfo.Extension,
+                ImageSize = fileInfo.Length,
+                ImagePath = imagePath
+            };
+
+            selectedImages.Add(imageInfo);
+        }
+
+        private void RenameFileAndAddToList(string imagePath)
+        {
+            try
+            {
+                string directory = Path.GetDirectoryName(imagePath);
+                string fileNameWithoutDots = Path.GetFileNameWithoutExtension(imagePath).Replace(".", string.Empty);
+                string newFileName = fileNameWithoutDots + Path.GetExtension(imagePath);
+
+                string newPath = Path.Combine(directory, newFileName);
+
+                selectedImages.RemoveAll(img => img.ImageName == Path.GetFileName(imagePath));
+
+                File.Move(imagePath, newPath);
+
+                AddFileToList(newPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error renaming file '{imagePath}': {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -112,15 +170,15 @@ namespace Binder
                     {
                         string outputPdfPath = saveDialog.FileName;
 
+                        DisableButtons();
+
                         progressBar.Minimum = 0;
                         progressBar.Maximum = selectedImages.Count;
                         progressBar.Value = 0;
 
-                        ConvertImagesToPdf(selectedImages, outputPdfPath);
+                        string[] imagePaths = selectedImages.Select(img => img.ImagePath).ToArray();
 
-                        MessageBox.Show("PDF created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        progressBar.Value = 0;
+                        backgroundWorker.RunWorkerAsync(new Tuple<string[], string>(imagePaths, outputPdfPath));
                     }
                 }
             }
@@ -130,12 +188,66 @@ namespace Binder
             }
         }
 
+        private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            Tuple<string[], string> arguments = e.Argument as Tuple<string[], string>;
+
+            string[] imagePaths = arguments.Item1;
+            string outputPdfPath = arguments.Item2;
+
+            ConvertImagesToPdf(selectedImages, outputPdfPath, worker, e);
+        }
+
+        private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled)
+            {
+                
+            }
+            else if (e.Error != null)
+            {
+                MessageBox.Show($"Error during processing: {e.Error.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("PDF created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            progressBar.Value = 0;
+            EnableButtons();
+        }
+
+        private void DisableButtons()
+        {
+            sfolder.Enabled = false;
+            sf.Enabled = false;
+            dsf.Enabled = false;
+            cl.Enabled = false;
+            bind.Enabled = false;
+        }
+
+        private void EnableButtons()
+        {
+            sfolder.Enabled = true;
+            sf.Enabled = true;
+            dsf.Enabled = true;
+            cl.Enabled = true;
+            bind.Enabled = true;
+        }
+
         private void UpdateDataGridView()
         {
             imagelist.DataSource = null;
             imagelist.DataSource = selectedImages;
             imagelist.Columns["ImagePath"].Visible = false;
         }
+
 
         private void imagelist_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -147,8 +259,6 @@ namespace Binder
                     ResizeImageAndShowPreview(imagePath);
                 }
             }
-
-
         }
 
         private void ResizeImageAndShowPreview(string imagePath)
@@ -171,8 +281,7 @@ namespace Binder
             }
         }
 
-
-        private void ConvertImagesToPdf(List<ImageInfo> images, string outputPdfPath)
+        private void ConvertImagesToPdf(List<ImageInfo> images, string outputPdfPath, BackgroundWorker worker, DoWorkEventArgs e)
         {
             using (PdfDocument pdf = new PdfDocument())
             {
@@ -182,27 +291,105 @@ namespace Binder
 
                     try
                     {
-                        using (XImage image = XImage.FromFile(imageInfo.ImagePath))
-                        {
-                            PdfPage page = pdf.AddPage();
-                            page.Width = image.PointWidth;
-                            page.Height = image.PointHeight;
+                        string lowerCaseExtension = imageInfo.ImageExtension.ToLower();
+                        imageInfo.ImagePath = Path.ChangeExtension(imageInfo.ImagePath, lowerCaseExtension);
 
-                            XGraphics gfx = XGraphics.FromPdfPage(page);
-                            gfx.DrawImage(image, 0, 0);
+                        using (XImage image = GetImage(imageInfo.ImagePath))
+                        {
+                            if (image != null)
+                            {
+                                PdfPage page = pdf.AddPage();
+                                page.Width = image.PointWidth;
+                                page.Height = image.PointHeight;
+
+                                XGraphics gfx = XGraphics.FromPdfPage(page);
+                                gfx.DrawImage(image, 0, 0);
+                            }
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Error processing image: {ex.Message}", "Error", MessageBoxButtons.OK,
-                                        MessageBoxIcon.Error);
+                        if (ex.Message.Contains("Unsupported file format"))
+                        {
+                            DialogResult result = MessageBox.Show($"Error processing image '{imageInfo.ImagePath}': {ex.Message}\nDo you want to rename the file and continue?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                            if (result == DialogResult.Yes)
+                            {
+                                RenameFile(imageInfo.ImagePath);
+
+                                i--;
+                                continue;
+                            }
+                            else
+                            {
+                                worker.CancelAsync();
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Error processing image '{imageInfo.ImagePath}': {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
 
-                    progressBar.Value = i + 1;
-                    Application.DoEvents();
+                    int progressPercentage = (i + 1) * 100 / images.Count;
+                    worker.ReportProgress(progressPercentage);
                 }
 
-                pdf.Save(outputPdfPath);
+                if (!worker.CancellationPending)
+                {
+                    pdf.Save(outputPdfPath);
+                }
+            }
+        }
+
+        private void RenameFile(string imagePath)
+        {
+            try
+            {
+                string directory = Path.GetDirectoryName(imagePath);
+                string fileNameWithoutDots = Path.GetFileNameWithoutExtension(imagePath).Replace(".", string.Empty);
+                string newFileName = fileNameWithoutDots + Path.GetExtension(imagePath);
+
+                string newPath = Path.Combine(directory, newFileName);
+
+                selectedImages.RemoveAll(img => img.ImageName == Path.GetFileName(imagePath));
+
+                File.Move(imagePath, newPath);
+
+                var imageInfo = new ImageInfo
+                {
+                    ImageId = selectedImages.Count + 1,
+                    ImageName = newFileName,
+                    ImageExtension = Path.GetExtension(newFileName),
+                    ImageSize = new FileInfo(newPath).Length,
+                    ImagePath = newPath
+                };
+                selectedImages.Add(imageInfo);
+
+                UpdateDataGridView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error renaming file '{imagePath}': {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private XImage GetImage(string imagePath)
+        {
+            try
+            {
+                using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+                {
+                    return XImage.FromStream(fs);
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new ApplicationException($"Error loading image '{imagePath}': {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new ApplicationException($"Error loading image '{imagePath}': {ex.Message}", ex);
             }
         }
 
@@ -229,6 +416,7 @@ namespace Binder
                 e.FormattingApplied = true;
             }
         }
+
         private string FormatFileSize(long fileSizeInBytes)
         {
             const long KB = 1024;
