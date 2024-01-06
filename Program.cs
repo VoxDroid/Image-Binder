@@ -16,7 +16,7 @@ namespace Binder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Binder());
+            Application.Run(new BinderWindow());
         }
     }
 }

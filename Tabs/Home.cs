@@ -7,14 +7,14 @@ using System.Windows.Forms;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 
-namespace Binder
+namespace Binder.Tabs
 {
-    public partial class Binder : Form
+    public partial class Home : UserControl
     {
         private List<ImageInfo> selectedImages = new List<ImageInfo>();
         private BackgroundWorker backgroundWorker;
 
-        public Binder()
+        public Home()
         {
             InitializeComponent();
             ConfigureDataGridView();
@@ -149,12 +149,18 @@ namespace Binder
             }
 
             UpdateDataGridView();
+
+            if (selectedImages.Count == 0)
+            {
+                ShowDefaultImage();
+            }
         }
 
         private void ClearDataGridViewButton_Click(object sender, EventArgs e)
         {
             selectedImages.Clear();
             UpdateDataGridView();
+            ShowDefaultImage();
         }
 
         private void BindToPdfButton_Click(object sender, EventArgs e)
@@ -208,7 +214,7 @@ namespace Binder
         {
             if (e.Cancelled)
             {
-                
+
             }
             else if (e.Error != null)
             {
@@ -251,7 +257,7 @@ namespace Binder
 
         private void imagelist_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0 && e.RowIndex < imagelist.Rows.Count)
+            if (imagelist.Rows.Count > 0 && e.RowIndex >= 0 && e.RowIndex < imagelist.Rows.Count)
             {
                 DataGridViewRow selectedRow = imagelist.Rows[e.RowIndex];
                 if (selectedRow.Cells["ImagePath"].Value is string imagePath)
@@ -259,6 +265,16 @@ namespace Binder
                     ResizeImageAndShowPreview(imagePath);
                 }
             }
+            else
+            {
+                ShowDefaultImage();
+            }
+        }
+
+        private void ShowDefaultImage()
+        {
+            preview.BackgroundImageLayout = ImageLayout.Stretch;
+            preview.BackgroundImage = Properties.Resources.stripes;
         }
 
         private void ResizeImageAndShowPreview(string imagePath)
@@ -271,7 +287,18 @@ namespace Binder
         {
             try
             {
-                System.Drawing.Image image = System.Drawing.Image.FromFile(imagePath);
+                System.Drawing.Image image;
+
+                if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+                {
+                    image = System.Drawing.Image.FromFile(imagePath);
+                }
+                else
+                {
+                    preview.BackgroundImageLayout = ImageLayout.Stretch;
+                    image = Properties.Resources.stripes;
+                }
+
                 preview.BackgroundImageLayout = ImageLayout.Zoom;
                 preview.BackgroundImage = image;
             }
