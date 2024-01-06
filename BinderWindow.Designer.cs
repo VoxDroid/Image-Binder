@@ -236,7 +236,6 @@
             this.Name = "BinderWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Binder";
-            this.TopMost = true;
             this.tabs.ResumeLayout(false);
             this.home.ResumeLayout(false);
             this.ResumeLayout(false);

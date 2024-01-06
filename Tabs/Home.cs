@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
@@ -11,7 +12,7 @@ namespace Binder.Tabs
 {
     public partial class Home : UserControl
     {
-        private List<ImageInfo> selectedImages = new List<ImageInfo>();
+        private BindingList<ImageInfo> selectedImages = new BindingList<ImageInfo>();
         private BackgroundWorker backgroundWorker;
 
         public Home()
@@ -46,11 +47,11 @@ namespace Binder.Tabs
                     string selectedFolder = folderBrowserDialog.SelectedPath;
 
                     string[] imagePaths = Directory.GetFiles(selectedFolder, "*.*", SearchOption.AllDirectories)
-                                                    .Where(s => s.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
-                                                                s.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                                                                s.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase))
-                                                    .Select(s => s.ToLower())
-                                                    .ToArray();
+                                    .Where(s => s.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
+                                                s.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                                                s.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase))
+                                    .Select(s => s.ToLower())
+                                    .ToArray();
 
                     ProcessImages(imagePaths);
                 }
@@ -97,8 +98,34 @@ namespace Binder.Tabs
                     AddFileToList(imagePath);
                 }
             }
+            SortImages();
 
             UpdateDataGridView();
+        }
+
+        private void SortImages()
+        {
+            switch (currentSortOption)
+            {
+                case SortOption.ImageId:
+                    selectedImages = new BindingList<ImageInfo>(selectedImages.OrderBy(img => img.ImageId).ToList());
+                    break;
+
+                case SortOption.ImageName:
+                    selectedImages = new BindingList<ImageInfo>(selectedImages.OrderBy(img => img.ImageName).ToList());
+                    break;
+
+
+                default:
+                    break;
+            }
+        }
+
+        private SortOption currentSortOption = SortOption.ImageId;
+        private enum SortOption
+        {
+            ImageId,
+            ImageName
         }
 
         private void AddFileToList(string imagePath)
@@ -126,7 +153,7 @@ namespace Binder.Tabs
 
                 string newPath = Path.Combine(directory, newFileName);
 
-                selectedImages.RemoveAll(img => img.ImageName == Path.GetFileName(imagePath));
+                selectedImages = new BindingList<ImageInfo>(selectedImages.Where(img => img.ImageName != Path.GetFileName(imagePath)).ToList()); 
 
                 File.Move(imagePath, newPath);
 
@@ -140,11 +167,53 @@ namespace Binder.Tabs
 
         private void DeleteSelectedFilesButton_Click(object sender, EventArgs e)
         {
+            if (imagelist.SelectedRows.Count > 0)
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to remove the selected files from the list?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    DeleteSelectedFiles();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No files selected for removal.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+
+        private void ClearDataGridViewButton_Click(object sender, EventArgs e)
+        {
+            if (selectedImages.Any())
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to clear the list?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    ClearDataGridView();
+                }
+            }
+            else
+            {
+                MessageBox.Show("No images to clear.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void ClearDataGridView()
+        {
+            selectedImages.Clear();
+            UpdateDataGridView();
+            ShowDefaultImage();
+        }
+
+        private void DeleteSelectedFiles()
+        {
             foreach (DataGridViewRow row in imagelist.SelectedRows)
             {
                 if (row.Cells["ImageId"].Value is int imageId)
                 {
-                    selectedImages.RemoveAll(image => image.ImageId == imageId);
+                    selectedImages = new BindingList<ImageInfo>(selectedImages.Where(image => image.ImageId != imageId).ToList());
                 }
             }
 
@@ -156,13 +225,6 @@ namespace Binder.Tabs
             }
         }
 
-        private void ClearDataGridViewButton_Click(object sender, EventArgs e)
-        {
-            selectedImages.Clear();
-            UpdateDataGridView();
-            ShowDefaultImage();
-        }
-
         private void BindToPdfButton_Click(object sender, EventArgs e)
         {
             if (selectedImages.Any())
@@ -172,6 +234,8 @@ namespace Binder.Tabs
                     saveDialog.Filter = "PDF files|*.pdf";
                     saveDialog.Title = "Save PDF File";
 
+                    saveDialog.FileName = $"binder_{DateTime.Now:yyyyMMdd_HHmmss}_{selectedImages.Count}";
+
                     if (saveDialog.ShowDialog() == DialogResult.OK)
                     {
                         string outputPdfPath = saveDialog.FileName;
@@ -179,10 +243,22 @@ namespace Binder.Tabs
                         DisableButtons();
 
                         progressBar.Minimum = 0;
-                        progressBar.Maximum = selectedImages.Count;
+                        progressBar.Maximum = 100;
                         progressBar.Value = 0;
+                        progressBar.ShowText = true;
 
-                        string[] imagePaths = selectedImages.Select(img => img.ImagePath).ToArray();
+                        string[] imagePaths;
+
+                        if (bo1.Checked)
+                        {
+                            SortImagesByImageId();
+                        }
+                        else if (bo2.Checked)
+                        {
+                            SortImagesByImageName();
+                        }
+
+                        imagePaths = selectedImages.Select(img => img.ImagePath).ToArray();
 
                         backgroundWorker.RunWorkerAsync(new Tuple<string[], string>(imagePaths, outputPdfPath));
                     }
@@ -194,6 +270,18 @@ namespace Binder.Tabs
             }
         }
 
+        private void SortImagesByImageId()
+        {
+            selectedImages = new BindingList<ImageInfo>(selectedImages.OrderBy(img => img.ImageId).ToList());
+            UpdateDataGridView();
+        }
+
+        private void SortImagesByImageName()
+        {
+            selectedImages = new BindingList<ImageInfo>(selectedImages.OrderBy(img => img.ImageName).ToList());
+            UpdateDataGridView();
+        }
+
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -202,12 +290,17 @@ namespace Binder.Tabs
             string[] imagePaths = arguments.Item1;
             string outputPdfPath = arguments.Item2;
 
-            ConvertImagesToPdf(selectedImages, outputPdfPath, worker, e);
+            ConvertImagesToPdf(selectedImages.ToList(), outputPdfPath, worker, e);
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             progressBar.Value = e.ProgressPercentage;
+
+            if (e.UserState is string progressText)
+            {
+                progressBar.Text = progressText;
+            }
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -226,6 +319,7 @@ namespace Binder.Tabs
             }
 
             progressBar.Value = 0;
+            progressBar.ShowText = false;
             EnableButtons();
         }
 
@@ -257,8 +351,13 @@ namespace Binder.Tabs
 
         private void imagelist_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (imagelist.Rows.Count > 0 && e.RowIndex >= 0 && e.RowIndex < imagelist.Rows.Count)
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
             {
+                if (imagelist.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection != SortOrder.None)
+                {
+                    return; 
+                }
+
                 DataGridViewRow selectedRow = imagelist.Rows[e.RowIndex];
                 if (selectedRow.Cells["ImagePath"].Value is string imagePath)
                 {
@@ -312,9 +411,12 @@ namespace Binder.Tabs
         {
             using (PdfDocument pdf = new PdfDocument())
             {
-                for (int i = 0; i < images.Count; i++)
+                int totalImages = images.Count;
+
+                for (int i = 0; i < totalImages; i++)
                 {
                     ImageInfo imageInfo = images[i];
+                    string imageName = Path.GetFileName(imageInfo.ImagePath);
 
                     try
                     {
@@ -333,71 +435,26 @@ namespace Binder.Tabs
                                 gfx.DrawImage(image, 0, 0);
                             }
                         }
+
+                        Thread.Sleep(50);
+
+                        int progressPercentage = (i + 1) * 100 / totalImages;
+                        string progressText = $"{imageName} {i + 1}/{totalImages}";
+
+                        worker.ReportProgress(progressPercentage, progressText);
                     }
                     catch (Exception ex)
                     {
-                        if (ex.Message.Contains("Unsupported file format"))
-                        {
-                            DialogResult result = MessageBox.Show($"Error processing image '{imageInfo.ImagePath}': {ex.Message}\nDo you want to rename the file and continue?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                            if (result == DialogResult.Yes)
-                            {
-                                RenameFile(imageInfo.ImagePath);
-
-                                i--;
-                                continue;
-                            }
-                            else
-                            {
-                                worker.CancelAsync();
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Error processing image '{imageInfo.ImagePath}': {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        MessageBox.Show($"Error processing image '{imageName}': {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-                    int progressPercentage = (i + 1) * 100 / images.Count;
-                    worker.ReportProgress(progressPercentage);
                 }
+
+                worker.ReportProgress(100, $"Completed {totalImages}/{totalImages}");
 
                 if (!worker.CancellationPending)
                 {
                     pdf.Save(outputPdfPath);
                 }
-            }
-        }
-
-        private void RenameFile(string imagePath)
-        {
-            try
-            {
-                string directory = Path.GetDirectoryName(imagePath);
-                string fileNameWithoutDots = Path.GetFileNameWithoutExtension(imagePath).Replace(".", string.Empty);
-                string newFileName = fileNameWithoutDots + Path.GetExtension(imagePath);
-
-                string newPath = Path.Combine(directory, newFileName);
-
-                selectedImages.RemoveAll(img => img.ImageName == Path.GetFileName(imagePath));
-
-                File.Move(imagePath, newPath);
-
-                var imageInfo = new ImageInfo
-                {
-                    ImageId = selectedImages.Count + 1,
-                    ImageName = newFileName,
-                    ImageExtension = Path.GetExtension(newFileName),
-                    ImageSize = new FileInfo(newPath).Length,
-                    ImagePath = newPath
-                };
-                selectedImages.Add(imageInfo);
-
-                UpdateDataGridView();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error renaming file '{imagePath}': {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -430,6 +487,13 @@ namespace Binder.Tabs
             imagelist.Columns["ImageSize"].DataPropertyName = "ImageSize";
             imagelist.Columns["ImagePath"].DataPropertyName = "ImagePath";
 
+            foreach (DataGridViewColumn column in imagelist.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
+
+            imagelist.DataSource = selectedImages;
+
             imagelist.CellClick += imagelist_CellClick;
         }
 
@@ -459,6 +523,26 @@ namespace Binder.Tabs
             public long ImageSize { get; set; }
             public string ActionButton { get; set; }
             public string ImagePath { get; set; }
+        }
+
+        private void bo2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (bo2.Checked)
+            {
+                currentSortOption = SortOption.ImageName;
+                SortImages();
+                UpdateDataGridView();
+            }
+        }
+
+        private void bo1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (bo1.Checked)
+            {
+                currentSortOption = SortOption.ImageId;
+                SortImages();
+                UpdateDataGridView();
+            }
         }
     }
 }
