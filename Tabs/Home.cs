@@ -15,12 +15,19 @@ namespace Binder.Tabs
         private BindingList<ImageInfo> selectedImages = new BindingList<ImageInfo>();
         private BackgroundWorker backgroundWorker;
         private CancellationTokenSource cancellationTokenSource;
+        private bool isBindingInProgress = false;
 
         public Home()
         {
             InitializeComponent();
             ConfigureDataGridView();
             InitializeBackgroundWorker();
+
+
+            isBindingInProgress = false;
+            imagelist.AllowDrop = true;
+            imagelist.DragDrop += imagelist_DragDrop;
+            imagelist.DragEnter += imagelist_DragEnter;
         }
 
         private void UpdateTotalImagesProgressBarText()
@@ -84,24 +91,38 @@ namespace Binder.Tabs
         {
             foreach (string imagePath in imagePaths)
             {
-                FileInfo fileInfo = new FileInfo(imagePath);
-                string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.Name);
-
-                if (fileNameWithoutExtension.Contains('.'))
+                if (File.Exists(imagePath))
                 {
-                    DialogResult result = MessageBox.Show($"The base file name '{fileNameWithoutExtension}' contains multiple dots. Do you want to rename the file?", "Rename File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (result == DialogResult.Yes)
+                    FileInfo fileInfo = new FileInfo(imagePath);
+                    string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.Name);
+
+                    if (fileNameWithoutExtension.Contains('.'))
                     {
-                        RenameFileAndAddToList(imagePath);
+                        DialogResult result = MessageBox.Show($"The base file name '{fileNameWithoutExtension}' contains multiple dots. Do you want to rename the file?", "Rename File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (result == DialogResult.Yes)
+                        {
+                            RenameFileAndAddToList(imagePath);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Skipping file '{fileInfo.Name}'.", "Skipped File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show($"Skipping file '{fileInfo.Name}'.", "Skipped File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        AddFileToList(imagePath);
                     }
                 }
-                else
+                else if (Directory.Exists(imagePath))
                 {
-                    AddFileToList(imagePath);
+                    string[] directoryImagePaths = Directory.GetFiles(imagePath, "*.*", SearchOption.AllDirectories)
+                        .Where(s => s.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
+                                    s.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
+                                    s.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase))
+                        .Select(s => s.ToLower())
+                        .ToArray();
+
+                    ProcessImages(directoryImagePaths);
                 }
             }
             SortImages();
@@ -235,6 +256,8 @@ namespace Binder.Tabs
             }
         }
 
+        private string FileNameX;
+
         private void BindToPdfButton_Click(object sender, EventArgs e)
         {
             if (selectedImages.Any())
@@ -251,11 +274,13 @@ namespace Binder.Tabs
                     saveDialog.Title = "Save PDF File";
 
                     saveDialog.FileName = $"binder_{DateTime.Now:yyyyMMdd_HHmmss}_{selectedImages.Count}";
+                    FileNameX = saveDialog.FileName;
 
                     if (saveDialog.ShowDialog() == DialogResult.OK)
                     {
                         string outputPdfPath = saveDialog.FileName;
 
+                        isBindingInProgress = true;
                         DisableButtons();
 
                         progressBar.Minimum = 0;
@@ -333,12 +358,13 @@ namespace Binder.Tabs
             }
             else
             {
-                MessageBox.Show("PDF created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"File: {FileNameX} created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             progressBar.Value = 0;
             EnableButtons();
             UpdateTotalImagesProgressBarText();
+            isBindingInProgress = false;
         }
 
         private void DisableButtons()
@@ -363,6 +389,24 @@ namespace Binder.Tabs
             bo1.Enabled = true;
             bo2.Enabled = true;
             abort.Enabled = false;
+        }
+
+        private void imagelist_DragEnter(object sender, DragEventArgs e)
+        {
+            e.Effect = isBindingInProgress ? DragDropEffects.None : (e.Data.GetDataPresent(DataFormats.FileDrop) ? DragDropEffects.Copy : DragDropEffects.None);
+        }
+
+        private void imagelist_DragDrop(object sender, DragEventArgs e)
+        {
+            if (!isBindingInProgress)
+            {
+                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+                if (files != null)
+                {
+                    ProcessImages(files);
+                }
+            }
         }
 
         private void UpdateDataGridView()

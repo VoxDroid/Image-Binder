@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Utilities.BunifuPages.BunifuAnimatorNS.Animation animation2 = new Utilities.BunifuPages.BunifuAnimatorNS.Animation();
+            Utilities.BunifuPages.BunifuAnimatorNS.Animation animation1 = new Utilities.BunifuPages.BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BinderWindow));
             this.borderlessform = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.appbar = new System.Windows.Forms.Label();
@@ -38,11 +38,11 @@
             this.guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.tabs = new Bunifu.UI.WinForms.BunifuPages();
             this.home = new System.Windows.Forms.TabPage();
+            this.home1 = new Binder.Tabs.Home();
             this.homebutton = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
-            this.home1 = new Binder.Tabs.Home();
             this.imagebinderIB = new Guna.UI2.WinForms.Guna2PictureBox();
             this.drag2 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.tabs.SuspendLayout();
@@ -65,11 +65,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.appbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.appbar.Cursor = System.Windows.Forms.Cursors.Default;
-            this.appbar.Font = new System.Drawing.Font("Poppins", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.appbar.Font = new System.Drawing.Font("Poppins SemiBold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.appbar.ForeColor = System.Drawing.Color.White;
             this.appbar.Location = new System.Drawing.Point(-3, -1);
             this.appbar.Name = "appbar";
-            this.appbar.Padding = new System.Windows.Forms.Padding(65, 12, 0, 0);
+            this.appbar.Padding = new System.Windows.Forms.Padding(60, 12, 0, 0);
             this.appbar.Size = new System.Drawing.Size(1141, 56);
             this.appbar.TabIndex = 0;
             this.appbar.Text = "Image Binder";
@@ -123,22 +123,22 @@
             this.tabs.SelectedIndex = 0;
             this.tabs.Size = new System.Drawing.Size(1133, 721);
             this.tabs.TabIndex = 4;
-            animation2.AnimateOnlyDifferences = false;
-            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
-            animation2.LeafCoeff = 0F;
-            animation2.MaxTime = 1F;
-            animation2.MinTime = 0F;
-            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
-            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
-            animation2.MosaicSize = 0;
-            animation2.Padding = new System.Windows.Forms.Padding(0);
-            animation2.RotateCoeff = 0F;
-            animation2.RotateLimit = 0F;
-            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
-            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
-            animation2.TimeCoeff = 0F;
-            animation2.TransparencyCoeff = 0F;
-            this.tabs.Transition = animation2;
+            animation1.AnimateOnlyDifferences = false;
+            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
+            animation1.LeafCoeff = 0F;
+            animation1.MaxTime = 1F;
+            animation1.MinTime = 0F;
+            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
+            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
+            animation1.MosaicSize = 0;
+            animation1.Padding = new System.Windows.Forms.Padding(0);
+            animation1.RotateCoeff = 0F;
+            animation1.RotateLimit = 0F;
+            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
+            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
+            animation1.TimeCoeff = 0F;
+            animation1.TransparencyCoeff = 0F;
+            this.tabs.Transition = animation1;
             this.tabs.TransitionType = Utilities.BunifuPages.BunifuAnimatorNS.AnimationType.Custom;
             // 
             // home
@@ -151,6 +151,15 @@
             this.home.Size = new System.Drawing.Size(1125, 695);
             this.home.TabIndex = 0;
             this.home.Text = "Home";
+            // 
+            // home1
+            // 
+            this.home1.BackColor = System.Drawing.Color.Silver;
+            this.home1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.home1.Location = new System.Drawing.Point(3, 3);
+            this.home1.Name = "home1";
+            this.home1.Size = new System.Drawing.Size(1119, 689);
+            this.home1.TabIndex = 0;
             // 
             // homebutton
             // 
@@ -249,23 +258,14 @@
             this.guna2Button4.UseTransparentBackground = true;
             this.guna2Button4.Click += new System.EventHandler(this.guna2Button4_Click);
             // 
-            // home1
-            // 
-            this.home1.BackColor = System.Drawing.Color.Silver;
-            this.home1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.home1.Location = new System.Drawing.Point(3, 3);
-            this.home1.Name = "home1";
-            this.home1.Size = new System.Drawing.Size(1119, 689);
-            this.home1.TabIndex = 0;
-            // 
             // imagebinderIB
             // 
             this.imagebinderIB.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.imagebinderIB.Image = global::Binder.Properties.Resources.IMAGE_BINDER_45x45;
             this.imagebinderIB.ImageRotate = 0F;
-            this.imagebinderIB.Location = new System.Drawing.Point(15, 4);
+            this.imagebinderIB.Location = new System.Drawing.Point(15, 8);
             this.imagebinderIB.Name = "imagebinderIB";
-            this.imagebinderIB.Size = new System.Drawing.Size(45, 45);
+            this.imagebinderIB.Size = new System.Drawing.Size(38, 38);
             this.imagebinderIB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imagebinderIB.TabIndex = 1;
             this.imagebinderIB.TabStop = false;
@@ -294,6 +294,7 @@
             this.Controls.Add(this.guna2Button4);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "BinderWindow";
