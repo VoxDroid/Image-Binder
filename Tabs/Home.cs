@@ -14,6 +14,7 @@ namespace Binder.Tabs
     {
         private BindingList<ImageInfo> selectedImages = new BindingList<ImageInfo>();
         private BackgroundWorker backgroundWorker;
+        private CancellationTokenSource cancellationTokenSource;
 
         public Home()
         {
@@ -229,6 +230,12 @@ namespace Binder.Tabs
         {
             if (selectedImages.Any())
             {
+                if (backgroundWorker.IsBusy)
+                {
+                    MessageBox.Show("A process is already running. Please wait for it to complete or abort it.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
                 using (var saveDialog = new SaveFileDialog())
                 {
                     saveDialog.Filter = "PDF files|*.pdf";
@@ -260,7 +267,9 @@ namespace Binder.Tabs
 
                         imagePaths = selectedImages.Select(img => img.ImagePath).ToArray();
 
-                        backgroundWorker.RunWorkerAsync(new Tuple<string[], string>(imagePaths, outputPdfPath));
+                        cancellationTokenSource = new CancellationTokenSource();
+
+                        backgroundWorker.RunWorkerAsync(new Tuple<string[], string, CancellationToken>(imagePaths, outputPdfPath, cancellationTokenSource.Token));
                     }
                 }
             }
@@ -285,12 +294,13 @@ namespace Binder.Tabs
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            Tuple<string[], string> arguments = e.Argument as Tuple<string[], string>;
+            Tuple<string[], string, CancellationToken> arguments = e.Argument as Tuple<string[], string, CancellationToken>;
 
             string[] imagePaths = arguments.Item1;
             string outputPdfPath = arguments.Item2;
+            CancellationToken cancellationToken = arguments.Item3;
 
-            ConvertImagesToPdf(selectedImages.ToList(), outputPdfPath, worker, e);
+            ConvertImagesToPdf(selectedImages.ToList(), outputPdfPath, worker, e, cancellationToken);
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -330,6 +340,9 @@ namespace Binder.Tabs
             dsf.Enabled = false;
             cl.Enabled = false;
             bind.Enabled = false;
+            bo1.Enabled = false;
+            bo2.Enabled = false;
+            abort.Enabled = true;
         }
 
         private void EnableButtons()
@@ -339,6 +352,9 @@ namespace Binder.Tabs
             dsf.Enabled = true;
             cl.Enabled = true;
             bind.Enabled = true;
+            bo1.Enabled = true;
+            bo2.Enabled = true;
+            abort.Enabled = false;
         }
 
         private void UpdateDataGridView()
@@ -407,10 +423,11 @@ namespace Binder.Tabs
             }
         }
 
-        private void ConvertImagesToPdf(List<ImageInfo> images, string outputPdfPath, BackgroundWorker worker, DoWorkEventArgs e)
+        private void ConvertImagesToPdf(List<ImageInfo> images, string outputPdfPath, BackgroundWorker worker, DoWorkEventArgs e, CancellationToken cancellationToken)
         {
             using (PdfDocument pdf = new PdfDocument())
             {
+
                 int totalImages = images.Count;
 
                 for (int i = 0; i < totalImages; i++)
@@ -425,7 +442,7 @@ namespace Binder.Tabs
 
                         using (XImage image = GetImage(imageInfo.ImagePath))
                         {
-                            if (image != null)
+                            if (image != null)  
                             {
                                 PdfPage page = pdf.AddPage();
                                 page.Width = image.PointWidth;
@@ -433,6 +450,12 @@ namespace Binder.Tabs
 
                                 XGraphics gfx = XGraphics.FromPdfPage(page);
                                 gfx.DrawImage(image, 0, 0);
+                            }
+
+                            if (cancellationToken.IsCancellationRequested)
+                            {
+                                e.Cancel = true;
+                                return;
                             }
                         }
 
@@ -543,6 +566,24 @@ namespace Binder.Tabs
                 SortImages();
                 UpdateDataGridView();
             }
+        }
+
+        private void abort_Click(object sender, EventArgs e)
+        {
+            if (backgroundWorker.IsBusy)
+            {
+                DialogResult result = MessageBox.Show("Do you want to abort the current process?", "Abort Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    cancellationTokenSource?.Cancel();
+                }
+            }
+        }
+
+        private void guna2VScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
         }
     }
 }
