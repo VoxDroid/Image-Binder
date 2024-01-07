@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            Utilities.BunifuPages.BunifuAnimatorNS.Animation animation1 = new Utilities.BunifuPages.BunifuAnimatorNS.Animation();
+            Utilities.BunifuPages.BunifuAnimatorNS.Animation animation2 = new Utilities.BunifuPages.BunifuAnimatorNS.Animation();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BinderWindow));
             this.borderlessform = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.appbar = new System.Windows.Forms.Label();
@@ -38,13 +38,16 @@
             this.guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.tabs = new Bunifu.UI.WinForms.BunifuPages();
             this.home = new System.Windows.Forms.TabPage();
-            this.home1 = new Binder.Tabs.Home();
             this.homebutton = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
+            this.home1 = new Binder.Tabs.Home();
+            this.imagebinderIB = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.drag2 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.tabs.SuspendLayout();
             this.home.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imagebinderIB)).BeginInit();
             this.SuspendLayout();
             // 
             // borderlessform
@@ -61,11 +64,12 @@
             this.appbar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.appbar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.appbar.Cursor = System.Windows.Forms.Cursors.Default;
             this.appbar.Font = new System.Drawing.Font("Poppins", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.appbar.ForeColor = System.Drawing.Color.White;
             this.appbar.Location = new System.Drawing.Point(-3, -1);
             this.appbar.Name = "appbar";
-            this.appbar.Padding = new System.Windows.Forms.Padding(25, 12, 0, 0);
+            this.appbar.Padding = new System.Windows.Forms.Padding(65, 12, 0, 0);
             this.appbar.Size = new System.Drawing.Size(1141, 56);
             this.appbar.TabIndex = 0;
             this.appbar.Text = "Image Binder";
@@ -80,6 +84,7 @@
             // 
             this.guna2ControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2ControlBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.guna2ControlBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2ControlBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.guna2ControlBox1.IconColor = System.Drawing.Color.White;
             this.guna2ControlBox1.Location = new System.Drawing.Point(1076, 12);
@@ -92,6 +97,7 @@
             this.guna2ControlBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.guna2ControlBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.guna2ControlBox3.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
+            this.guna2ControlBox3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2ControlBox3.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.guna2ControlBox3.IconColor = System.Drawing.Color.White;
             this.guna2ControlBox3.Location = new System.Drawing.Point(1025, 12);
@@ -117,22 +123,22 @@
             this.tabs.SelectedIndex = 0;
             this.tabs.Size = new System.Drawing.Size(1133, 721);
             this.tabs.TabIndex = 4;
-            animation1.AnimateOnlyDifferences = false;
-            animation1.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.BlindCoeff")));
-            animation1.LeafCoeff = 0F;
-            animation1.MaxTime = 1F;
-            animation1.MinTime = 0F;
-            animation1.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicCoeff")));
-            animation1.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation1.MosaicShift")));
-            animation1.MosaicSize = 0;
-            animation1.Padding = new System.Windows.Forms.Padding(0);
-            animation1.RotateCoeff = 0F;
-            animation1.RotateLimit = 0F;
-            animation1.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.ScaleCoeff")));
-            animation1.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation1.SlideCoeff")));
-            animation1.TimeCoeff = 0F;
-            animation1.TransparencyCoeff = 0F;
-            this.tabs.Transition = animation1;
+            animation2.AnimateOnlyDifferences = false;
+            animation2.BlindCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.BlindCoeff")));
+            animation2.LeafCoeff = 0F;
+            animation2.MaxTime = 1F;
+            animation2.MinTime = 0F;
+            animation2.MosaicCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicCoeff")));
+            animation2.MosaicShift = ((System.Drawing.PointF)(resources.GetObject("animation2.MosaicShift")));
+            animation2.MosaicSize = 0;
+            animation2.Padding = new System.Windows.Forms.Padding(0);
+            animation2.RotateCoeff = 0F;
+            animation2.RotateLimit = 0F;
+            animation2.ScaleCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.ScaleCoeff")));
+            animation2.SlideCoeff = ((System.Drawing.PointF)(resources.GetObject("animation2.SlideCoeff")));
+            animation2.TimeCoeff = 0F;
+            animation2.TransparencyCoeff = 0F;
+            this.tabs.Transition = animation2;
             this.tabs.TransitionType = Utilities.BunifuPages.BunifuAnimatorNS.AnimationType.Custom;
             // 
             // home
@@ -146,15 +152,6 @@
             this.home.TabIndex = 0;
             this.home.Text = "Home";
             // 
-            // home1
-            // 
-            this.home1.BackColor = System.Drawing.Color.Silver;
-            this.home1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.home1.Location = new System.Drawing.Point(3, 3);
-            this.home1.Name = "home1";
-            this.home1.Size = new System.Drawing.Size(1119, 689);
-            this.home1.TabIndex = 0;
-            // 
             // homebutton
             // 
             this.homebutton.Animated = true;
@@ -163,6 +160,7 @@
             this.homebutton.BorderThickness = 2;
             this.homebutton.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             this.homebutton.Checked = true;
+            this.homebutton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.homebutton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.homebutton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.homebutton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -170,10 +168,10 @@
             this.homebutton.FillColor = System.Drawing.Color.DarkSlateGray;
             this.homebutton.Font = new System.Drawing.Font("Poppins", 10F);
             this.homebutton.ForeColor = System.Drawing.Color.White;
-            this.homebutton.Location = new System.Drawing.Point(0, 53);
+            this.homebutton.Location = new System.Drawing.Point(0, 52);
             this.homebutton.Name = "homebutton";
             this.homebutton.PressedColor = System.Drawing.Color.White;
-            this.homebutton.Size = new System.Drawing.Size(108, 39);
+            this.homebutton.Size = new System.Drawing.Size(108, 41);
             this.homebutton.TabIndex = 5;
             this.homebutton.Text = "Home";
             this.homebutton.UseTransparentBackground = true;
@@ -186,6 +184,7 @@
             this.guna2Button2.BorderColor = System.Drawing.Color.Gray;
             this.guna2Button2.BorderThickness = 2;
             this.guna2Button2.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.guna2Button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -193,10 +192,10 @@
             this.guna2Button2.FillColor = System.Drawing.Color.DarkSlateGray;
             this.guna2Button2.Font = new System.Drawing.Font("Poppins", 10F);
             this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Location = new System.Drawing.Point(106, 53);
+            this.guna2Button2.Location = new System.Drawing.Point(106, 52);
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.PressedColor = System.Drawing.Color.White;
-            this.guna2Button2.Size = new System.Drawing.Size(108, 39);
+            this.guna2Button2.Size = new System.Drawing.Size(108, 41);
             this.guna2Button2.TabIndex = 6;
             this.guna2Button2.Text = "Other Tabs";
             this.guna2Button2.UseTransparentBackground = true;
@@ -209,6 +208,7 @@
             this.guna2Button3.BorderColor = System.Drawing.Color.Gray;
             this.guna2Button3.BorderThickness = 2;
             this.guna2Button3.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.guna2Button3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -216,10 +216,10 @@
             this.guna2Button3.FillColor = System.Drawing.Color.DarkSlateGray;
             this.guna2Button3.Font = new System.Drawing.Font("Poppins", 10F);
             this.guna2Button3.ForeColor = System.Drawing.Color.White;
-            this.guna2Button3.Location = new System.Drawing.Point(212, 53);
+            this.guna2Button3.Location = new System.Drawing.Point(212, 52);
             this.guna2Button3.Name = "guna2Button3";
             this.guna2Button3.PressedColor = System.Drawing.Color.White;
-            this.guna2Button3.Size = new System.Drawing.Size(108, 39);
+            this.guna2Button3.Size = new System.Drawing.Size(108, 41);
             this.guna2Button3.TabIndex = 7;
             this.guna2Button3.Text = "Other Tabs";
             this.guna2Button3.UseTransparentBackground = true;
@@ -232,6 +232,7 @@
             this.guna2Button4.BorderColor = System.Drawing.Color.Gray;
             this.guna2Button4.BorderThickness = 2;
             this.guna2Button4.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.guna2Button4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button4.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button4.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button4.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -239,14 +240,41 @@
             this.guna2Button4.FillColor = System.Drawing.Color.DarkSlateGray;
             this.guna2Button4.Font = new System.Drawing.Font("Poppins", 10F);
             this.guna2Button4.ForeColor = System.Drawing.Color.White;
-            this.guna2Button4.Location = new System.Drawing.Point(318, 53);
+            this.guna2Button4.Location = new System.Drawing.Point(318, 52);
             this.guna2Button4.Name = "guna2Button4";
             this.guna2Button4.PressedColor = System.Drawing.Color.White;
-            this.guna2Button4.Size = new System.Drawing.Size(108, 39);
+            this.guna2Button4.Size = new System.Drawing.Size(108, 41);
             this.guna2Button4.TabIndex = 8;
             this.guna2Button4.Text = "Other Tabs";
             this.guna2Button4.UseTransparentBackground = true;
             this.guna2Button4.Click += new System.EventHandler(this.guna2Button4_Click);
+            // 
+            // home1
+            // 
+            this.home1.BackColor = System.Drawing.Color.Silver;
+            this.home1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.home1.Location = new System.Drawing.Point(3, 3);
+            this.home1.Name = "home1";
+            this.home1.Size = new System.Drawing.Size(1119, 689);
+            this.home1.TabIndex = 0;
+            // 
+            // imagebinderIB
+            // 
+            this.imagebinderIB.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.imagebinderIB.Image = global::Binder.Properties.Resources.IMAGE_BINDER_45x45;
+            this.imagebinderIB.ImageRotate = 0F;
+            this.imagebinderIB.Location = new System.Drawing.Point(15, 4);
+            this.imagebinderIB.Name = "imagebinderIB";
+            this.imagebinderIB.Size = new System.Drawing.Size(45, 45);
+            this.imagebinderIB.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imagebinderIB.TabIndex = 1;
+            this.imagebinderIB.TabStop = false;
+            // 
+            // drag2
+            // 
+            this.drag2.DockIndicatorTransparencyValue = 0.6D;
+            this.drag2.TargetControl = this.imagebinderIB;
+            this.drag2.UseTransparentDrag = true;
             // 
             // BinderWindow
             // 
@@ -255,6 +283,7 @@
             this.BackColor = System.Drawing.Color.Gray;
             this.ClientSize = new System.Drawing.Size(1133, 812);
             this.ControlBox = false;
+            this.Controls.Add(this.imagebinderIB);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.guna2ControlBox3);
             this.Controls.Add(this.guna2ControlBox1);
@@ -263,6 +292,7 @@
             this.Controls.Add(this.guna2Button2);
             this.Controls.Add(this.guna2Button3);
             this.Controls.Add(this.guna2Button4);
+            this.Cursor = System.Windows.Forms.Cursors.Default;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -271,6 +301,7 @@
             this.Text = "Binder";
             this.tabs.ResumeLayout(false);
             this.home.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imagebinderIB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -289,6 +320,8 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button homebutton;
         private Tabs.Home home1;
+        private Guna.UI2.WinForms.Guna2PictureBox imagebinderIB;
+        private Guna.UI2.WinForms.Guna2DragControl drag2;
     }
 }
 

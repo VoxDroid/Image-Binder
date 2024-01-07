@@ -23,6 +23,11 @@ namespace Binder.Tabs
             InitializeBackgroundWorker();
         }
 
+        private void UpdateTotalImagesProgressBarText()
+        {
+            progressBar.Text = $"Total Images to Bind: {selectedImages.Count}";
+        }
+
         private void InitializeBackgroundWorker()
         {
             backgroundWorker = new BackgroundWorker
@@ -100,7 +105,7 @@ namespace Binder.Tabs
                 }
             }
             SortImages();
-
+            UpdateTotalImagesProgressBarText();
             UpdateDataGridView();
         }
 
@@ -206,6 +211,7 @@ namespace Binder.Tabs
             selectedImages.Clear();
             UpdateDataGridView();
             ShowDefaultImage();
+            UpdateTotalImagesProgressBarText();
         }
 
         private void DeleteSelectedFiles()
@@ -218,7 +224,10 @@ namespace Binder.Tabs
                 }
             }
 
+            UpdateTotalImagesProgressBarText();
             UpdateDataGridView();
+
+
 
             if (selectedImages.Count == 0)
             {
@@ -252,7 +261,6 @@ namespace Binder.Tabs
                         progressBar.Minimum = 0;
                         progressBar.Maximum = 100;
                         progressBar.Value = 0;
-                        progressBar.ShowText = true;
 
                         string[] imagePaths;
 
@@ -329,8 +337,8 @@ namespace Binder.Tabs
             }
 
             progressBar.Value = 0;
-            progressBar.ShowText = false;
             EnableButtons();
+            UpdateTotalImagesProgressBarText();
         }
 
         private void DisableButtons()
@@ -371,13 +379,14 @@ namespace Binder.Tabs
             {
                 if (imagelist.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection != SortOrder.None)
                 {
-                    return; 
+                    return;
                 }
 
                 DataGridViewRow selectedRow = imagelist.Rows[e.RowIndex];
                 if (selectedRow.Cells["ImagePath"].Value is string imagePath)
                 {
                     ResizeImageAndShowPreview(imagePath);
+                    currentlyDisplayedImagePath = imagePath;
                 }
             }
             else
@@ -386,8 +395,12 @@ namespace Binder.Tabs
             }
         }
 
+        private string currentlyDisplayedImagePath;
+
         private void ShowDefaultImage()
         {
+            currentlyDisplayedImagePath = null;
+
             preview.BackgroundImageLayout = ImageLayout.Stretch;
             preview.BackgroundImage = Properties.Resources.stripes;
         }
@@ -581,9 +594,52 @@ namespace Binder.Tabs
             }
         }
 
-        private void guna2VScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private void bindoption1_Click(object sender, EventArgs e)
         {
+            bo1.Checked = true;
+        }
 
+        private void bindoption2_Click(object sender, EventArgs e)
+        {
+            bo2.Checked = true;
+        }
+
+        private void preview_DoubleClick(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(currentlyDisplayedImagePath) && imagelist.SelectedRows.Count > 0)
+            {
+                if (imagelist.SelectedRows[0].Cells["ImagePath"].Value is string selectedImagePath)
+                {
+                    if (currentlyDisplayedImagePath == selectedImagePath)
+                    {
+                        if (!IsDefaultImage(currentlyDisplayedImagePath))
+                        {
+                            ShowOriginalImage(currentlyDisplayedImagePath);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void ShowOriginalImage(string imagePath)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
+                {
+                    System.Diagnostics.Process.Start(imagePath);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening original image: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool IsDefaultImage(string imagePath)
+        {
+            return imagePath == null || !File.Exists(imagePath) || Path.GetFileName(imagePath) == "stripes";
         }
     }
 }

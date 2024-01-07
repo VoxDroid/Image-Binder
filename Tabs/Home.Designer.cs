@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.preview = new Guna.UI2.WinForms.Guna2Panel();
             this.cl = new Guna.UI2.WinForms.Guna2Button();
             this.sf = new Guna.UI2.WinForms.Guna2Button();
@@ -70,16 +70,18 @@
             this.preview.Size = new System.Drawing.Size(1093, 371);
             this.preview.TabIndex = 21;
             this.preview.UseTransparentBackground = true;
+            this.preview.DoubleClick += new System.EventHandler(this.preview_DoubleClick);
             // 
             // cl
             // 
             this.cl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cl.Animated = true;
+            this.cl.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cl.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.cl.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.cl.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.cl.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.cl.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.cl.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.cl.Font = new System.Drawing.Font("Poppins", 10F);
             this.cl.ForeColor = System.Drawing.Color.White;
             this.cl.Location = new System.Drawing.Point(774, 581);
@@ -93,6 +95,7 @@
             // 
             this.sf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.sf.Animated = true;
+            this.sf.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sf.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.sf.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.sf.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -111,6 +114,7 @@
             // 
             this.dsf.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dsf.Animated = true;
+            this.dsf.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dsf.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.dsf.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.dsf.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -129,6 +133,7 @@
             // 
             this.bind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bind.Animated = true;
+            this.bind.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bind.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.bind.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.bind.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -152,6 +157,7 @@
             // 
             this.sfolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.sfolder.Animated = true;
+            this.sfolder.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sfolder.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.sfolder.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.sfolder.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -163,7 +169,7 @@
             this.sfolder.Name = "sfolder";
             this.sfolder.Size = new System.Drawing.Size(162, 45);
             this.sfolder.TabIndex = 22;
-            this.sfolder.Text = "Select Folder(s)";
+            this.sfolder.Text = "Select Directory";
             this.sfolder.Click += new System.EventHandler(this.SelectFoldersButton_Click);
             // 
             // borderlessform
@@ -196,6 +202,7 @@
             this.bo1.CheckedState.BorderThickness = 0;
             this.bo1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.bo1.CheckedState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.bo1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bo1.Location = new System.Drawing.Point(786, 493);
             this.bo1.Name = "bo1";
             this.bo1.Size = new System.Drawing.Size(20, 20);
@@ -210,6 +217,7 @@
             // bindoption1
             // 
             this.bindoption1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bindoption1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bindoption1.Font = new System.Drawing.Font("Poppins", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bindoption1.Location = new System.Drawing.Point(812, 493);
             this.bindoption1.Name = "bindoption1";
@@ -217,10 +225,12 @@
             this.bindoption1.TabIndex = 26;
             this.bindoption1.Text = "Bind Order by ID";
             this.bindoption1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bindoption1.Click += new System.EventHandler(this.bindoption1_Click);
             // 
             // bindoption2
             // 
             this.bindoption2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bindoption2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bindoption2.Font = new System.Drawing.Font("Poppins", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bindoption2.Location = new System.Drawing.Point(980, 493);
             this.bindoption2.Name = "bindoption2";
@@ -228,6 +238,7 @@
             this.bindoption2.TabIndex = 28;
             this.bindoption2.Text = "Bind Order by Name";
             this.bindoption2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bindoption2.Click += new System.EventHandler(this.bindoption2_Click);
             // 
             // bo2
             // 
@@ -237,6 +248,7 @@
             this.bo2.CheckedState.BorderThickness = 0;
             this.bo2.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.bo2.CheckedState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.bo2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bo2.Location = new System.Drawing.Point(954, 493);
             this.bo2.Name = "bo2";
             this.bo2.Size = new System.Drawing.Size(20, 20);
@@ -259,9 +271,10 @@
             this.progressBar.Name = "progressBar";
             this.progressBar.ProgressColor = System.Drawing.Color.Silver;
             this.progressBar.ProgressColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.progressBar.ShowText = true;
             this.progressBar.Size = new System.Drawing.Size(330, 38);
             this.progressBar.TabIndex = 29;
-            this.progressBar.Text = "guna2ProgressBar1";
+            this.progressBar.Text = "Total Images to Bind: 0";
             this.progressBar.TextMode = Guna.UI2.WinForms.Enums.ProgressBarTextMode.Custom;
             this.progressBar.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
             this.progressBar.UseTransparentBackground = true;
@@ -270,6 +283,7 @@
             // 
             this.abort.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.abort.Animated = true;
+            this.abort.Cursor = System.Windows.Forms.Cursors.Hand;
             this.abort.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.abort.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.abort.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -334,19 +348,19 @@
             this.imagelist.AllowUserToDeleteRows = false;
             this.imagelist.AllowUserToResizeColumns = false;
             this.imagelist.AllowUserToResizeRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            this.imagelist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
+            this.imagelist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.imagelist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.imagelist.BackgroundColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.imagelist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.imagelist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.imagelist.ColumnHeadersHeight = 28;
             this.imagelist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.imageid,
@@ -354,14 +368,15 @@
             this.imageextension,
             this.imagesize,
             this.imagepath});
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.imagelist.DefaultCellStyle = dataGridViewCellStyle9;
+            this.imagelist.Cursor = System.Windows.Forms.Cursors.Hand;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.imagelist.DefaultCellStyle = dataGridViewCellStyle15;
             this.imagelist.GridColor = System.Drawing.Color.DarkGray;
             this.imagelist.Location = new System.Drawing.Point(11, 435);
             this.imagelist.Name = "imagelist";

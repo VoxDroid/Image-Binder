@@ -63,6 +63,36 @@ namespace Binder.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap IMAGE_BINDER {
+            get {
+                object obj = ResourceManager.GetObject("IMAGE BINDER", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IMAGE_BINDER_250x250 {
+            get {
+                object obj = ResourceManager.GetObject("IMAGE BINDER 250x250", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap IMAGE_BINDER_45x45 {
+            get {
+                object obj = ResourceManager.GetObject("IMAGE BINDER 45x45", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap stripes {
             get {
                 object obj = ResourceManager.GetObject("stripes", resourceCulture);
