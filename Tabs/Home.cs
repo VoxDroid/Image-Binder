@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing.Drawing2D;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using PdfSharp.Drawing;
 using PdfSharp.Pdf;
+using System.Drawing.Imaging;
+using ImageMagick;
+
 
 namespace Binder.Tabs
 {
@@ -22,12 +27,39 @@ namespace Binder.Tabs
             InitializeComponent();
             ConfigureDataGridView();
             InitializeBackgroundWorker();
+            InitializeQualityControls();
 
 
             isBindingInProgress = false;
             imagelist.AllowDrop = true;
-            imagelist.DragDrop += imagelist_DragDrop;
-            imagelist.DragEnter += imagelist_DragEnter;
+        }
+
+        private void InitializeQualityControls()
+        {
+            qualityTrackBar.Minimum = 1;
+            qualityTrackBar.Maximum = 100;
+            qualityTrackBar.Value = 80; 
+            qualityTrackBar.Name = "qualityTrackBar";
+            qualityTrackBar.Scroll += qualityTrackBar_Scroll;
+
+            qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
+            qualityLabel.Name = "qualityLabel";
+        }
+
+        private void qualityTrackBar_Scroll(object sender, EventArgs e)
+        {
+            qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
+
+            if (!string.IsNullOrEmpty(currentlyDisplayedImagePath))
+            {
+                ResizeImageAndShowPreview(currentlyDisplayedImagePath, qualityTrackBar.Value);
+            }
+        }
+
+        private void ResizeImageAndShowPreview(string imagePath, int quality)
+        {
+            ShowImagePreview(imagePath, quality);
+            UpdateDataGridView();
         }
 
         private void UpdateTotalImagesProgressBarText()
@@ -89,6 +121,8 @@ namespace Binder.Tabs
 
         private void ProcessImages(string[] imagePaths)
         {
+            bool performInvalidCharacterCheck = true;
+
             foreach (string imagePath in imagePaths)
             {
                 if (File.Exists(imagePath))
@@ -96,39 +130,65 @@ namespace Binder.Tabs
                     FileInfo fileInfo = new FileInfo(imagePath);
                     string fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileInfo.Name);
 
-                    if (fileNameWithoutExtension.Contains('.'))
+                    if (performInvalidCharacterCheck && fileNameWithoutExtension.Contains('.'))
                     {
-                        DialogResult result = MessageBox.Show($"The base file name '{fileNameWithoutExtension}' contains multiple dots. Do you want to rename the file?", "Rename File", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        DialogResult result = MessageBox.Show($"The base file name '{fileNameWithoutExtension}' contains an invalid character that might affect the binding process. Do you want to rename all detected invalid files automatically?\n\nYES = Rename All\nNO = Rename Current File\nCANCEL = Skip and Bypass (Default)", "Rename Files", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
                         if (result == DialogResult.Yes)
                         {
-                            RenameFileAndAddToList(imagePath);
+                            RenameAllFilesAndAddToList(imagePaths);
+                            return;
+                        }
+                        else if (result == DialogResult.Cancel)
+                        {
+                            performInvalidCharacterCheck = false;
+                            AddFileToList(imagePath);
                         }
                         else
                         {
-                            MessageBox.Show($"Skipping file '{fileInfo.Name}'.", "Skipped File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            RenameFileAndAddToList(imagePath);
                         }
+                    }
+                    else if (IsImageFileValid(imagePath))
+                    {
+                        AddFileToList(imagePath);
                     }
                     else
                     {
-                        AddFileToList(imagePath);
+                        MessageBox.Show($"Skipping file '{fileInfo.Name}' due to an invalid image extension.", "Skipped File", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else if (Directory.Exists(imagePath))
                 {
                     string[] directoryImagePaths = Directory.GetFiles(imagePath, "*.*", SearchOption.AllDirectories)
-                        .Where(s => s.EndsWith(".png", StringComparison.OrdinalIgnoreCase) ||
-                                    s.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                                    s.EndsWith(".jpeg", StringComparison.OrdinalIgnoreCase))
+                        .Where(s => IsImageFileValid(s))
                         .Select(s => s.ToLower())
                         .ToArray();
 
                     ProcessImages(directoryImagePaths);
                 }
             }
+
             SortImages();
             UpdateTotalImagesProgressBarText();
             UpdateDataGridView();
         }
+
+        private void RenameAllFilesAndAddToList(string[] imagePaths)
+        {
+            foreach (string imagePath in imagePaths)
+            {
+                RenameFileAndAddToList(imagePath);
+            }
+        }
+
+        private bool IsImageFileValid(string filePath)
+        {
+            string extension = Path.GetExtension(filePath)?.ToLower();
+
+            return extension == ".png" || extension == ".jpg" || extension == ".jpeg";
+        }
+
 
         private void SortImages()
         {
@@ -377,6 +437,11 @@ namespace Binder.Tabs
             bo1.Enabled = false;
             bo2.Enabled = false;
             abort.Enabled = true;
+            qualityTrackBar.Enabled = false;
+            trackbarlow.Enabled = false;
+            trackbarhigh.Enabled = false;
+            bindoption1.Enabled = false;
+            bindoption2.Enabled = false;
         }
 
         private void EnableButtons()
@@ -389,6 +454,11 @@ namespace Binder.Tabs
             bo1.Enabled = true;
             bo2.Enabled = true;
             abort.Enabled = false;
+            qualityTrackBar.Enabled = true;
+            trackbarlow.Enabled = true;
+            trackbarhigh.Enabled = true;
+            bindoption1.Enabled = true;
+            bindoption2.Enabled = true;
         }
 
         private void imagelist_DragEnter(object sender, DragEventArgs e)
@@ -429,8 +499,15 @@ namespace Binder.Tabs
                 DataGridViewRow selectedRow = imagelist.Rows[e.RowIndex];
                 if (selectedRow.Cells["ImagePath"].Value is string imagePath)
                 {
-                    ResizeImageAndShowPreview(imagePath);
-                    currentlyDisplayedImagePath = imagePath;
+                    if (File.Exists(imagePath))
+                    {
+                        ResizeImageAndShowPreview(imagePath);
+                        currentlyDisplayedImagePath = imagePath;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Original image not found: {imagePath}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             else
@@ -451,11 +528,12 @@ namespace Binder.Tabs
 
         private void ResizeImageAndShowPreview(string imagePath)
         {
-            ShowImagePreview(imagePath);
+            int selectedQuality = qualityTrackBar.Value;
+            ShowImagePreview(imagePath, selectedQuality);
             UpdateDataGridView();
         }
 
-        private void ShowImagePreview(string imagePath)
+        private void ShowImagePreview(string imagePath, int quality)
         {
             try
             {
@@ -463,7 +541,7 @@ namespace Binder.Tabs
 
                 if (!string.IsNullOrEmpty(imagePath) && File.Exists(imagePath))
                 {
-                    image = System.Drawing.Image.FromFile(imagePath);
+                    image = ResizeImageWithQuality(imagePath, quality);
                 }
                 else
                 {
@@ -480,11 +558,71 @@ namespace Binder.Tabs
             }
         }
 
+        private System.Drawing.Image ResizeImageWithQuality(string imagePath, int quality)
+        {
+            using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
+            {
+                Image originalImage = System.Drawing.Image.FromStream(fs);
+                ImageFormat originalFormat = originalImage.RawFormat;
+
+                Image resizedImage;
+
+                if (originalFormat.Equals(ImageFormat.Jpeg))
+                {
+                    resizedImage = ResizeJpegImage(originalImage, quality);
+                }
+                else
+                {
+                    resizedImage = ResizeImage(originalImage);
+                }
+
+                return resizedImage;
+            }
+        }
+
+        private Image ResizeJpegImage(Image originalImage, int quality)
+        {
+            EncoderParameters encoderParameters = new EncoderParameters(1);
+            encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, quality);
+
+            ImageCodecInfo jpegCodec = GetEncoderInfo("image/jpeg");
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                originalImage.Save(ms, jpegCodec, encoderParameters);
+                return Image.FromStream(ms);
+            }
+        }
+
+        private Image ResizeImage(Image originalImage)
+        {
+            int selectedQuality = qualityTrackBar.Value;
+            EncoderParameters encoderParameters = new EncoderParameters(1);
+            encoderParameters.Param[0] = new EncoderParameter(Encoder.Quality, selectedQuality);
+
+            ImageCodecInfo jpegCodec = GetEncoderInfo("image/jpeg");
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                originalImage.Save(ms, jpegCodec, encoderParameters);
+                return Image.FromStream(ms);
+            }
+        }
+
+        private ImageCodecInfo GetEncoderInfo(string mimeType)
+        {
+            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
+            return codecs.FirstOrDefault(codec => codec.MimeType == mimeType);
+        }
+
+
         private void ConvertImagesToPdf(List<ImageInfo> images, string outputPdfPath, BackgroundWorker worker, DoWorkEventArgs e, CancellationToken cancellationToken)
         {
-            using (PdfDocument pdf = new PdfDocument())
-            {
+            string tempJpegFolder = Path.Combine(Path.GetTempPath(), "BinderTempJpegFiles");
+            Directory.CreateDirectory(tempJpegFolder);
 
+            using (MagickImageCollection imageCollection = new MagickImageCollection())
+            {
                 int totalImages = images.Count;
 
                 for (int i = 0; i < totalImages; i++)
@@ -497,23 +635,24 @@ namespace Binder.Tabs
                         string lowerCaseExtension = imageInfo.ImageExtension.ToLower();
                         imageInfo.ImagePath = Path.ChangeExtension(imageInfo.ImagePath, lowerCaseExtension);
 
-                        using (XImage image = GetImage(imageInfo.ImagePath))
+                        if (lowerCaseExtension == ".png")
                         {
-                            if (image != null)  
-                            {
-                                PdfPage page = pdf.AddPage();
-                                page.Width = image.PointWidth;
-                                page.Height = image.PointHeight;
+                            string tempJpegPath = ConvertPngToJpeg(imageInfo.ImagePath, tempJpegFolder);
+                            imageInfo.ImagePath = tempJpegPath;
+                        }
 
-                                XGraphics gfx = XGraphics.FromPdfPage(page);
-                                gfx.DrawImage(image, 0, 0);
-                            }
+                        using (MagickImage image = new MagickImage(imageInfo.ImagePath))
+                        {
+                            int selectedQuality = qualityTrackBar.Value;
+                            image.Quality = selectedQuality;
 
-                            if (cancellationToken.IsCancellationRequested)
-                            {
-                                e.Cancel = true;
-                                return;
-                            }
+                            imageCollection.Add(new MagickImage(image));
+                        }
+
+                        if (cancellationToken.IsCancellationRequested)
+                        {
+                            e.Cancel = true;
+                            return;
                         }
 
                         Thread.Sleep(50);
@@ -533,27 +672,36 @@ namespace Binder.Tabs
 
                 if (!worker.CancellationPending)
                 {
-                    pdf.Save(outputPdfPath);
+                    imageCollection.Write(outputPdfPath, MagickFormat.Pdf);
                 }
+
+                CleanUpTempJpegFiles(tempJpegFolder);
             }
         }
 
-        private XImage GetImage(string imagePath)
+        private string ConvertPngToJpeg(string pngImagePath, string tempJpegFolder)
+        {
+            using (MagickImage pngImage = new MagickImage(pngImagePath))
+            {
+                string tempJpegPath = Path.Combine(tempJpegFolder, Path.GetFileNameWithoutExtension(pngImagePath) + ".jpg");
+
+                pngImage.Quality = qualityTrackBar.Value;
+
+                pngImage.Write(tempJpegPath, MagickFormat.Jpeg);
+
+                return tempJpegPath;
+            }
+        }
+
+        private void CleanUpTempJpegFiles(string tempJpegFolder)
         {
             try
             {
-                using (FileStream fs = new FileStream(imagePath, FileMode.Open, FileAccess.Read))
-                {
-                    return XImage.FromStream(fs);
-                }
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw new ApplicationException($"Error loading image '{imagePath}': {ex.Message}", ex);
+                Directory.GetFiles(tempJpegFolder, "*.jpg").ToList().ForEach(File.Delete);
             }
             catch (Exception ex)
             {
-                throw new ApplicationException($"Error loading image '{imagePath}': {ex.Message}", ex);
+                MessageBox.Show($"Error cleaning up temporary JPEG files: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -573,8 +721,6 @@ namespace Binder.Tabs
             }
 
             imagelist.DataSource = selectedImages;
-
-            imagelist.CellClick += imagelist_CellClick;
         }
 
         private void imagelist_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -684,6 +830,23 @@ namespace Binder.Tabs
         private bool IsDefaultImage(string imagePath)
         {
             return imagePath == null || !File.Exists(imagePath) || Path.GetFileName(imagePath) == "stripes";
+        }
+
+        private void trackbarlow_Click(object sender, EventArgs e)
+        {
+            qualityTrackBar.Value = 1;
+            qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
+        }
+
+        private void trackbarhigh_Click(object sender, EventArgs e)
+        {
+            qualityTrackBar.Value = 100;
+            qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
+        }
+
+        private void qualityTrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
         }
     }
 }

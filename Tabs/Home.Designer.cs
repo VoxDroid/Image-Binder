@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.preview = new Guna.UI2.WinForms.Guna2Panel();
             this.cl = new Guna.UI2.WinForms.Guna2Button();
             this.sf = new Guna.UI2.WinForms.Guna2Button();
@@ -54,6 +54,11 @@
             this.imageid = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.imagelist = new Guna.UI2.WinForms.Guna2DataGridView();
             this.guna2VScrollBar1 = new Guna.UI2.WinForms.Guna2VScrollBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.qualityTrackBar = new Guna.UI2.WinForms.Guna2TrackBar();
+            this.trackbarlow = new System.Windows.Forms.Label();
+            this.trackbarhigh = new System.Windows.Forms.Label();
+            this.qualityLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imagelist)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,9 +70,11 @@
             this.preview.BackColor = System.Drawing.Color.Transparent;
             this.preview.BackgroundImage = global::Binder.Properties.Resources.stripes;
             this.preview.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.preview.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.preview.BorderThickness = 2;
             this.preview.Location = new System.Drawing.Point(11, 40);
             this.preview.Name = "preview";
-            this.preview.Size = new System.Drawing.Size(1093, 371);
+            this.preview.Size = new System.Drawing.Size(757, 371);
             this.preview.TabIndex = 21;
             this.preview.UseTransparentBackground = true;
             this.preview.DoubleClick += new System.EventHandler(this.preview_DoubleClick);
@@ -183,12 +190,11 @@
             // 
             // label1
             // 
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
             this.label1.Font = new System.Drawing.Font("Poppins", 15F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Location = new System.Drawing.Point(11, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1117, 37);
+            this.label1.Size = new System.Drawing.Size(757, 37);
             this.label1.TabIndex = 24;
             this.label1.Text = "Image Preview";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -348,19 +354,19 @@
             this.imagelist.AllowUserToDeleteRows = false;
             this.imagelist.AllowUserToResizeColumns = false;
             this.imagelist.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
-            this.imagelist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.imagelist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.imagelist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.imagelist.BackgroundColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.imagelist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.imagelist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.imagelist.ColumnHeadersHeight = 28;
             this.imagelist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.imageid,
@@ -369,14 +375,14 @@
             this.imagesize,
             this.imagepath});
             this.imagelist.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.imagelist.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.imagelist.DefaultCellStyle = dataGridViewCellStyle3;
             this.imagelist.GridColor = System.Drawing.Color.DarkGray;
             this.imagelist.Location = new System.Drawing.Point(11, 435);
             this.imagelist.Name = "imagelist";
@@ -410,6 +416,8 @@
             this.imagelist.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.imagelist.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.imagelist_CellClick);
             this.imagelist.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.imagelist_CellFormatting);
+            this.imagelist.DragDrop += new System.Windows.Forms.DragEventHandler(this.imagelist_DragDrop);
+            this.imagelist.DragEnter += new System.Windows.Forms.DragEventHandler(this.imagelist_DragEnter);
             // 
             // guna2VScrollBar1
             // 
@@ -428,11 +436,85 @@
             this.guna2VScrollBar1.ThumbSize = 5F;
             this.guna2VScrollBar1.Value = 1;
             // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.Font = new System.Drawing.Font("Poppins", 15F);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label2.Location = new System.Drawing.Point(774, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(343, 37);
+            this.label2.TabIndex = 32;
+            this.label2.Text = "Configuration";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // qualityTrackBar
+            // 
+            this.qualityTrackBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.qualityTrackBar.BackColor = System.Drawing.Color.Transparent;
+            this.qualityTrackBar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.qualityTrackBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.qualityTrackBar.HoverState.ThumbColor = System.Drawing.Color.Purple;
+            this.qualityTrackBar.Location = new System.Drawing.Point(816, 52);
+            this.qualityTrackBar.Name = "qualityTrackBar";
+            this.qualityTrackBar.Size = new System.Drawing.Size(253, 23);
+            this.qualityTrackBar.Style = Guna.UI2.WinForms.Enums.TrackBarStyle.Metro;
+            this.qualityTrackBar.TabIndex = 33;
+            this.qualityTrackBar.ThumbColor = System.Drawing.Color.Teal;
+            this.qualityTrackBar.Value = 100;
+            this.qualityTrackBar.ValueChanged += new System.EventHandler(this.qualityTrackBar_ValueChanged);
+            // 
+            // trackbarlow
+            // 
+            this.trackbarlow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackbarlow.AutoSize = true;
+            this.trackbarlow.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.trackbarlow.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trackbarlow.Location = new System.Drawing.Point(787, 53);
+            this.trackbarlow.Name = "trackbarlow";
+            this.trackbarlow.Size = new System.Drawing.Size(23, 22);
+            this.trackbarlow.TabIndex = 34;
+            this.trackbarlow.Text = "1%";
+            this.trackbarlow.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.trackbarlow.Click += new System.EventHandler(this.trackbarlow_Click);
+            // 
+            // trackbarhigh
+            // 
+            this.trackbarhigh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackbarhigh.AutoSize = true;
+            this.trackbarhigh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.trackbarhigh.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trackbarhigh.Location = new System.Drawing.Point(1073, 53);
+            this.trackbarhigh.Name = "trackbarhigh";
+            this.trackbarhigh.Size = new System.Drawing.Size(39, 22);
+            this.trackbarhigh.TabIndex = 35;
+            this.trackbarhigh.Text = "100%";
+            this.trackbarhigh.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.trackbarhigh.Click += new System.EventHandler(this.trackbarhigh_Click);
+            // 
+            // qualityLabel
+            // 
+            this.qualityLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.qualityLabel.AutoSize = true;
+            this.qualityLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.qualityLabel.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.qualityLabel.Location = new System.Drawing.Point(824, 78);
+            this.qualityLabel.Name = "qualityLabel";
+            this.qualityLabel.Size = new System.Drawing.Size(211, 25);
+            this.qualityLabel.TabIndex = 36;
+            this.qualityLabel.Text = "Image Compression Quality: ";
+            this.qualityLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.qualityLabel);
+            this.Controls.Add(this.trackbarhigh);
+            this.Controls.Add(this.trackbarlow);
+            this.Controls.Add(this.qualityTrackBar);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.guna2VScrollBar1);
             this.Controls.Add(this.abort);
             this.Controls.Add(this.progressBar);
@@ -452,6 +534,7 @@
             this.Size = new System.Drawing.Size(1117, 688);
             ((System.ComponentModel.ISupportInitialize)(this.imagelist)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -478,5 +561,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn imagesize;
         private System.Windows.Forms.DataGridViewTextBoxColumn imagepath;
         private Guna.UI2.WinForms.Guna2VScrollBar guna2VScrollBar1;
+        private System.Windows.Forms.Label label2;
+        private Guna.UI2.WinForms.Guna2TrackBar qualityTrackBar;
+        private System.Windows.Forms.Label trackbarhigh;
+        private System.Windows.Forms.Label trackbarlow;
+        private System.Windows.Forms.Label qualityLabel;
     }
 }
