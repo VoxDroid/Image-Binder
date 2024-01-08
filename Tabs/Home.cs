@@ -21,6 +21,7 @@ namespace Binder.Tabs
         private BackgroundWorker backgroundWorker;
         private CancellationTokenSource cancellationTokenSource;
         private bool isBindingInProgress = false;
+        private bool isLosslessMode = false;
 
         public Home()
         {
@@ -29,9 +30,17 @@ namespace Binder.Tabs
             InitializeBackgroundWorker();
             InitializeQualityControls();
 
-
             isBindingInProgress = false;
             imagelist.AllowDrop = true;
+
+            if (oql.Checked)
+            {
+                qualityTrackBar.Enabled = false;
+                isLosslessMode = true;
+                qualityLabel.Text = $"Image Compression Quality: Off";
+                trackbarhigh.Enabled = false;
+                trackbarlow.Enabled = false;
+            }
         }
 
         private void InitializeQualityControls()
@@ -362,7 +371,14 @@ namespace Binder.Tabs
 
                         cancellationTokenSource = new CancellationTokenSource();
 
-                        backgroundWorker.RunWorkerAsync(new Tuple<string[], string, CancellationToken>(imagePaths, outputPdfPath, cancellationTokenSource.Token));
+                        if (isLosslessMode)
+                        {
+                            backgroundWorker.RunWorkerAsync(new Tuple<string[], string, CancellationToken, bool>(imagePaths, outputPdfPath, cancellationTokenSource.Token, true));
+                        }
+                        else
+                        {
+                            backgroundWorker.RunWorkerAsync(new Tuple<string[], string, CancellationToken, bool>(imagePaths, outputPdfPath, cancellationTokenSource.Token, false));
+                        }
                     }
                 }
             }
@@ -371,6 +387,7 @@ namespace Binder.Tabs
                 MessageBox.Show("No images selected. Please select images first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
 
         private void SortImagesByImageId()
         {
@@ -387,13 +404,14 @@ namespace Binder.Tabs
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
-            Tuple<string[], string, CancellationToken> arguments = e.Argument as Tuple<string[], string, CancellationToken>;
+            Tuple<string[], string, CancellationToken, bool> arguments = e.Argument as Tuple<string[], string, CancellationToken, bool>;
 
             string[] imagePaths = arguments.Item1;
             string outputPdfPath = arguments.Item2;
             CancellationToken cancellationToken = arguments.Item3;
+            bool losslessMode = arguments.Item4;
 
-            ConvertImagesToPdf(selectedImages.ToList(), outputPdfPath, worker, e, cancellationToken);
+            ConvertImagesToPdf(selectedImages.ToList(), outputPdfPath, worker, e, cancellationToken, losslessMode);
         }
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -454,9 +472,18 @@ namespace Binder.Tabs
             bo1.Enabled = true;
             bo2.Enabled = true;
             abort.Enabled = false;
-            qualityTrackBar.Enabled = true;
-            trackbarlow.Enabled = true;
-            trackbarhigh.Enabled = true;
+            if (oql.Checked)
+            {
+                qualityTrackBar.Enabled = false ;
+                trackbarlow.Enabled = false;
+                trackbarhigh.Enabled = false;
+            }
+            else
+            {
+                qualityTrackBar.Enabled = true;
+                trackbarlow.Enabled = true;
+                trackbarhigh.Enabled = true;
+            }
             bindoption1.Enabled = true;
             bindoption2.Enabled = true;
         }
@@ -616,7 +643,7 @@ namespace Binder.Tabs
         }
 
 
-        private void ConvertImagesToPdf(List<ImageInfo> images, string outputPdfPath, BackgroundWorker worker, DoWorkEventArgs e, CancellationToken cancellationToken)
+        private void ConvertImagesToPdf(List<ImageInfo> images, string outputPdfPath, BackgroundWorker worker, DoWorkEventArgs e, CancellationToken cancellationToken, bool losslessMode)
         {
             string tempJpegFolder = Path.Combine(Path.GetTempPath(), "BinderTempJpegFiles");
             Directory.CreateDirectory(tempJpegFolder);
@@ -632,21 +659,21 @@ namespace Binder.Tabs
 
                     try
                     {
-                        string lowerCaseExtension = imageInfo.ImageExtension.ToLower();
-                        imageInfo.ImagePath = Path.ChangeExtension(imageInfo.ImagePath, lowerCaseExtension);
-
-                        if (lowerCaseExtension == ".png")
+                        if (imageInfo.ImagePath.EndsWith(".png", StringComparison.OrdinalIgnoreCase))
                         {
-                            string tempJpegPath = ConvertPngToJpeg(imageInfo.ImagePath, tempJpegFolder);
-                            imageInfo.ImagePath = tempJpegPath;
+                            if (losslessMode)
+                            {
+                                imageCollection.Add(new MagickImage(imageInfo.ImagePath));
+                            }
+                            else
+                            {
+                                string tempJpegPath = ConvertPngToJpeg(imageInfo.ImagePath, tempJpegFolder);
+                                imageCollection.Add(new MagickImage(tempJpegPath));
+                            }
                         }
-
-                        using (MagickImage image = new MagickImage(imageInfo.ImagePath))
+                        else
                         {
-                            int selectedQuality = qualityTrackBar.Value;
-                            image.Quality = selectedQuality;
-
-                            imageCollection.Add(new MagickImage(image));
+                            imageCollection.Add(new MagickImage(imageInfo.ImagePath));
                         }
 
                         if (cancellationToken.IsCancellationRequested)
@@ -846,7 +873,42 @@ namespace Binder.Tabs
 
         private void qualityTrackBar_ValueChanged(object sender, EventArgs e)
         {
-            qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
+            if (!isLosslessMode)
+            {
+                qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
+            }
+        }
+
+        private void oql_CheckedChanged(object sender, EventArgs e)
+        {
+            if (oql.Checked)
+            {
+                qualityTrackBar.Enabled = false;
+                isLosslessMode = true;
+                qualityLabel.Text = $"Image Compression Quality: Off";
+                trackbarhigh.Enabled = false;
+                trackbarlow.Enabled = false;
+            }
+            else
+            {
+                qualityTrackBar.Enabled = true; 
+                isLosslessMode = false;
+                qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
+                trackbarhigh.Enabled = true;
+                trackbarlow.Enabled = true;
+            }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            if (oql.Checked)
+            {
+                oql.Checked = false;
+            }
+            else
+            {
+                oql.Checked = true;
+            }
         }
     }
 }
