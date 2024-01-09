@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.preview = new Guna.UI2.WinForms.Guna2Panel();
             this.cl = new Guna.UI2.WinForms.Guna2Button();
             this.sf = new Guna.UI2.WinForms.Guna2Button();
@@ -61,6 +61,15 @@
             this.qualityLabel = new System.Windows.Forms.Label();
             this.oql = new Guna.UI2.WinForms.Guna2CustomCheckBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.titletb = new Guna.UI2.WinForms.Guna2TextBox();
+            this.titleC = new System.Windows.Forms.Label();
+            this.authorC = new System.Windows.Forms.Label();
+            this.authortb = new Guna.UI2.WinForms.Guna2TextBox();
+            this.keywordsC = new System.Windows.Forms.Label();
+            this.keywordstb = new Guna.UI2.WinForms.Guna2TextBox();
+            this.subjectC = new System.Windows.Forms.Label();
+            this.subjecttb = new Guna.UI2.WinForms.Guna2TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.imagelist)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,7 +85,7 @@
             this.preview.BorderThickness = 2;
             this.preview.Location = new System.Drawing.Point(11, 40);
             this.preview.Name = "preview";
-            this.preview.Size = new System.Drawing.Size(757, 371);
+            this.preview.Size = new System.Drawing.Size(757, 374);
             this.preview.TabIndex = 21;
             this.preview.UseTransparentBackground = true;
             this.preview.DoubleClick += new System.EventHandler(this.preview_DoubleClick);
@@ -356,19 +365,19 @@
             this.imagelist.AllowUserToDeleteRows = false;
             this.imagelist.AllowUserToResizeColumns = false;
             this.imagelist.AllowUserToResizeRows = false;
-            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
-            this.imagelist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            this.imagelist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.imagelist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.imagelist.BackgroundColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle14.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.imagelist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.imagelist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
             this.imagelist.ColumnHeadersHeight = 28;
             this.imagelist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.imageid,
@@ -377,14 +386,14 @@
             this.imagesize,
             this.imagepath});
             this.imagelist.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle15.BackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle15.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.imagelist.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.imagelist.DefaultCellStyle = dataGridViewCellStyle9;
             this.imagelist.GridColor = System.Drawing.Color.DarkGray;
             this.imagelist.Location = new System.Drawing.Point(11, 435);
             this.imagelist.Name = "imagelist";
@@ -457,7 +466,7 @@
             this.qualityTrackBar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.qualityTrackBar.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.qualityTrackBar.HoverState.ThumbColor = System.Drawing.Color.Purple;
-            this.qualityTrackBar.Location = new System.Drawing.Point(816, 52);
+            this.qualityTrackBar.Location = new System.Drawing.Point(816, 65);
             this.qualityTrackBar.Name = "qualityTrackBar";
             this.qualityTrackBar.Size = new System.Drawing.Size(253, 23);
             this.qualityTrackBar.Style = Guna.UI2.WinForms.Enums.TrackBarStyle.Metro;
@@ -472,7 +481,7 @@
             this.trackbarlow.AutoSize = true;
             this.trackbarlow.Cursor = System.Windows.Forms.Cursors.Hand;
             this.trackbarlow.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trackbarlow.Location = new System.Drawing.Point(787, 53);
+            this.trackbarlow.Location = new System.Drawing.Point(787, 66);
             this.trackbarlow.Name = "trackbarlow";
             this.trackbarlow.Size = new System.Drawing.Size(23, 22);
             this.trackbarlow.TabIndex = 34;
@@ -486,7 +495,7 @@
             this.trackbarhigh.AutoSize = true;
             this.trackbarhigh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.trackbarhigh.Font = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trackbarhigh.Location = new System.Drawing.Point(1073, 53);
+            this.trackbarhigh.Location = new System.Drawing.Point(1073, 66);
             this.trackbarhigh.Name = "trackbarhigh";
             this.trackbarhigh.Size = new System.Drawing.Size(39, 22);
             this.trackbarhigh.TabIndex = 35;
@@ -500,7 +509,7 @@
             this.qualityLabel.AutoSize = true;
             this.qualityLabel.Cursor = System.Windows.Forms.Cursors.Default;
             this.qualityLabel.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.qualityLabel.Location = new System.Drawing.Point(824, 78);
+            this.qualityLabel.Location = new System.Drawing.Point(824, 94);
             this.qualityLabel.Name = "qualityLabel";
             this.qualityLabel.Size = new System.Drawing.Size(211, 25);
             this.qualityLabel.TabIndex = 36;
@@ -516,7 +525,7 @@
             this.oql.CheckedState.BorderRadius = 2;
             this.oql.CheckedState.BorderThickness = 0;
             this.oql.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.oql.Location = new System.Drawing.Point(791, 128);
+            this.oql.Location = new System.Drawing.Point(845, 133);
             this.oql.Name = "oql";
             this.oql.Size = new System.Drawing.Size(20, 20);
             this.oql.TabIndex = 37;
@@ -533,19 +542,200 @@
             this.label3.AutoSize = true;
             this.label3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label3.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(817, 126);
+            this.label3.Location = new System.Drawing.Point(871, 131);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(110, 25);
+            this.label3.Size = new System.Drawing.Size(176, 25);
             this.label3.TabIndex = 38;
-            this.label3.Text = "Lossless Mode";
+            this.label3.Text = "Lossless Mode (Default)";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Font = new System.Drawing.Font("Poppins", 14F);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.label4.Location = new System.Drawing.Point(774, 197);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(343, 37);
+            this.label4.TabIndex = 39;
+            this.label4.Text = "Metadata Properties";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // titletb
+            // 
+            this.titletb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.titletb.Animated = true;
+            this.titletb.BackColor = System.Drawing.Color.Transparent;
+            this.titletb.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.titletb.DefaultText = "";
+            this.titletb.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.titletb.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.titletb.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.titletb.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.titletb.FocusedState.BorderColor = System.Drawing.Color.Teal;
+            this.titletb.Font = new System.Drawing.Font("Poppins", 12F);
+            this.titletb.ForeColor = System.Drawing.Color.Black;
+            this.titletb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.titletb.Location = new System.Drawing.Point(774, 287);
+            this.titletb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.titletb.MaxLength = 100;
+            this.titletb.Name = "titletb";
+            this.titletb.PasswordChar = '\0';
+            this.titletb.PlaceholderText = "Title...";
+            this.titletb.SelectedText = "";
+            this.titletb.Size = new System.Drawing.Size(162, 36);
+            this.titletb.TabIndex = 43;
+            // 
+            // titleC
+            // 
+            this.titleC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.titleC.AutoSize = true;
+            this.titleC.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.titleC.Font = new System.Drawing.Font("Poppins", 13F);
+            this.titleC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.titleC.Location = new System.Drawing.Point(774, 252);
+            this.titleC.Name = "titleC";
+            this.titleC.Size = new System.Drawing.Size(54, 31);
+            this.titleC.TabIndex = 44;
+            this.titleC.Text = "Title:";
+            this.titleC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.titleC.Click += new System.EventHandler(this.titleC_Click);
+            // 
+            // authorC
+            // 
+            this.authorC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.authorC.AutoSize = true;
+            this.authorC.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.authorC.Font = new System.Drawing.Font("Poppins", 13F);
+            this.authorC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.authorC.Location = new System.Drawing.Point(942, 252);
+            this.authorC.Name = "authorC";
+            this.authorC.Size = new System.Drawing.Size(80, 31);
+            this.authorC.TabIndex = 46;
+            this.authorC.Text = "Author:";
+            this.authorC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.authorC.Click += new System.EventHandler(this.authorC_Click);
+            // 
+            // authortb
+            // 
+            this.authortb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.authortb.Animated = true;
+            this.authortb.BackColor = System.Drawing.Color.Transparent;
+            this.authortb.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.authortb.DefaultText = "";
+            this.authortb.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.authortb.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.authortb.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.authortb.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.authortb.FocusedState.BorderColor = System.Drawing.Color.Teal;
+            this.authortb.Font = new System.Drawing.Font("Poppins", 12F);
+            this.authortb.ForeColor = System.Drawing.Color.Black;
+            this.authortb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.authortb.Location = new System.Drawing.Point(942, 287);
+            this.authortb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.authortb.MaxLength = 100;
+            this.authortb.Name = "authortb";
+            this.authortb.PasswordChar = '\0';
+            this.authortb.PlaceholderText = "Author...";
+            this.authortb.SelectedText = "";
+            this.authortb.Size = new System.Drawing.Size(162, 36);
+            this.authortb.TabIndex = 45;
+            // 
+            // keywordsC
+            // 
+            this.keywordsC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.keywordsC.AutoSize = true;
+            this.keywordsC.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.keywordsC.Font = new System.Drawing.Font("Poppins", 13F);
+            this.keywordsC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.keywordsC.Location = new System.Drawing.Point(942, 327);
+            this.keywordsC.Name = "keywordsC";
+            this.keywordsC.Size = new System.Drawing.Size(105, 31);
+            this.keywordsC.TabIndex = 50;
+            this.keywordsC.Text = "Keywords:";
+            this.keywordsC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.keywordsC.Click += new System.EventHandler(this.keywordsC_Click);
+            // 
+            // keywordstb
+            // 
+            this.keywordstb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.keywordstb.Animated = true;
+            this.keywordstb.BackColor = System.Drawing.Color.Transparent;
+            this.keywordstb.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.keywordstb.DefaultText = "";
+            this.keywordstb.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.keywordstb.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.keywordstb.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.keywordstb.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.keywordstb.FocusedState.BorderColor = System.Drawing.Color.Teal;
+            this.keywordstb.Font = new System.Drawing.Font("Poppins", 12F);
+            this.keywordstb.ForeColor = System.Drawing.Color.Black;
+            this.keywordstb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.keywordstb.Location = new System.Drawing.Point(942, 362);
+            this.keywordstb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.keywordstb.MaxLength = 100;
+            this.keywordstb.Name = "keywordstb";
+            this.keywordstb.PasswordChar = '\0';
+            this.keywordstb.PlaceholderText = "Keywords...";
+            this.keywordstb.SelectedText = "";
+            this.keywordstb.Size = new System.Drawing.Size(162, 36);
+            this.keywordstb.TabIndex = 49;
+            // 
+            // subjectC
+            // 
+            this.subjectC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.subjectC.AutoSize = true;
+            this.subjectC.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.subjectC.Font = new System.Drawing.Font("Poppins", 13F);
+            this.subjectC.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.subjectC.Location = new System.Drawing.Point(774, 327);
+            this.subjectC.Name = "subjectC";
+            this.subjectC.Size = new System.Drawing.Size(86, 31);
+            this.subjectC.TabIndex = 48;
+            this.subjectC.Text = "Subject:";
+            this.subjectC.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.subjectC.Click += new System.EventHandler(this.subjectC_Click);
+            // 
+            // subjecttb
+            // 
+            this.subjecttb.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.subjecttb.Animated = true;
+            this.subjecttb.BackColor = System.Drawing.Color.Transparent;
+            this.subjecttb.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.subjecttb.DefaultText = "";
+            this.subjecttb.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.subjecttb.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.subjecttb.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.subjecttb.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.subjecttb.FocusedState.BorderColor = System.Drawing.Color.Teal;
+            this.subjecttb.Font = new System.Drawing.Font("Poppins", 12F);
+            this.subjecttb.ForeColor = System.Drawing.Color.Black;
+            this.subjecttb.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.subjecttb.Location = new System.Drawing.Point(774, 362);
+            this.subjecttb.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.subjecttb.MaxLength = 100;
+            this.subjecttb.Name = "subjecttb";
+            this.subjecttb.PasswordChar = '\0';
+            this.subjecttb.PlaceholderText = "Subject...";
+            this.subjecttb.SelectedText = "";
+            this.subjecttb.Size = new System.Drawing.Size(162, 36);
+            this.subjecttb.TabIndex = 47;
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Silver;
+            this.Controls.Add(this.keywordsC);
+            this.Controls.Add(this.keywordstb);
+            this.Controls.Add(this.subjectC);
+            this.Controls.Add(this.subjecttb);
+            this.Controls.Add(this.authorC);
+            this.Controls.Add(this.authortb);
+            this.Controls.Add(this.titleC);
+            this.Controls.Add(this.titletb);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.oql);
             this.Controls.Add(this.qualityLabel);
@@ -606,5 +796,14 @@
         private System.Windows.Forms.Label qualityLabel;
         private Guna.UI2.WinForms.Guna2CustomCheckBox oql;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private Guna.UI2.WinForms.Guna2TextBox titletb;
+        private System.Windows.Forms.Label titleC;
+        private System.Windows.Forms.Label authorC;
+        private Guna.UI2.WinForms.Guna2TextBox authortb;
+        private System.Windows.Forms.Label keywordsC;
+        private Guna.UI2.WinForms.Guna2TextBox keywordstb;
+        private System.Windows.Forms.Label subjectC;
+        private Guna.UI2.WinForms.Guna2TextBox subjecttb;
     }
 }

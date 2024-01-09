@@ -73,6 +73,7 @@
             this.appbar.Size = new System.Drawing.Size(1141, 56);
             this.appbar.TabIndex = 0;
             this.appbar.Text = "Image Binder";
+            this.appbar.Click += new System.EventHandler(this.appbar_Click);
             // 
             // drag
             // 

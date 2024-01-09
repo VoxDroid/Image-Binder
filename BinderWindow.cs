@@ -36,5 +36,10 @@ namespace Binder
         {
 
         }
+
+        private void appbar_Click(object sender, EventArgs e)
+        {
+            appbar.Focus();
+        }
     }
 }

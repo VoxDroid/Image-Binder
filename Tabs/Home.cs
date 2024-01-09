@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing.Drawing2D;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using PdfSharp.Drawing;
-using PdfSharp.Pdf;
 using System.Drawing.Imaging;
 using ImageMagick;
-
+using iText.Kernel.Pdf;
 
 namespace Binder.Tabs
 {
@@ -47,9 +45,10 @@ namespace Binder.Tabs
         {
             qualityTrackBar.Minimum = 1;
             qualityTrackBar.Maximum = 100;
-            qualityTrackBar.Value = 80; 
+            qualityTrackBar.Value = 100; 
             qualityTrackBar.Name = "qualityTrackBar";
             qualityTrackBar.Scroll += qualityTrackBar_Scroll;
+            oql.CheckedChanged += oql_CheckedChanged;
 
             qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
             qualityLabel.Name = "qualityLabel";
@@ -528,8 +527,16 @@ namespace Binder.Tabs
                 {
                     if (File.Exists(imagePath))
                     {
-                        ResizeImageAndShowPreview(imagePath);
+
+                        if (isLosslessMode)
+                        {
+                            LastTBV = qualityTrackBar.Value;
+                            qualityTrackBar.Value = 100;
+                        }
+
+                        ShowImagePreview(imagePath, qualityTrackBar.Value);
                         currentlyDisplayedImagePath = imagePath;
+                        qualityTrackBar.Value = LastTBV;
                     }
                     else
                     {
@@ -553,12 +560,8 @@ namespace Binder.Tabs
             preview.BackgroundImage = Properties.Resources.stripes;
         }
 
-        private void ResizeImageAndShowPreview(string imagePath)
-        {
-            int selectedQuality = qualityTrackBar.Value;
-            ShowImagePreview(imagePath, selectedQuality);
-            UpdateDataGridView();
-        }
+
+
 
         private void ShowImagePreview(string imagePath, int quality)
         {
@@ -575,6 +578,8 @@ namespace Binder.Tabs
                     preview.BackgroundImageLayout = ImageLayout.Stretch;
                     image = Properties.Resources.stripes;
                 }
+                
+                
 
                 preview.BackgroundImageLayout = ImageLayout.Zoom;
                 preview.BackgroundImage = image;
@@ -695,14 +700,51 @@ namespace Binder.Tabs
                     }
                 }
 
-                worker.ReportProgress(100, $"Completed {totalImages}/{totalImages}");
+                worker.ReportProgress(100, $"Completed {totalImages}/{totalImages}: Now Processing File...");
 
                 if (!worker.CancellationPending)
                 {
-                    imageCollection.Write(outputPdfPath, MagickFormat.Pdf);
-                }
+                    string tempPdfPath = Path.Combine(Path.GetTempPath(), "tempPdf.pdf");
 
-                CleanUpTempJpegFiles(tempJpegFolder);
+                    using (var pdfDocument = new PdfSharp.Pdf.PdfDocument())
+                    {
+                        foreach (var image in imageCollection)
+                        {
+                            var pdfPage = pdfDocument.AddPage();
+                            pdfPage.Width = XUnit.FromPoint(image.Width);
+                            pdfPage.Height = XUnit.FromPoint(image.Height);
+                            XGraphics pdfGraphics = XGraphics.FromPdfPage(pdfPage);
+
+                            byte[] imageBytes = image.ToByteArray(MagickFormat.Jpeg);
+
+                            using (MemoryStream ms = new MemoryStream(imageBytes))
+                            {
+                                var xImage = XImage.FromStream(ms);
+                                pdfGraphics.DrawImage(xImage, 0, 0, pdfPage.Width, pdfPage.Height);
+                            }
+                        }
+
+                        pdfDocument.Save(tempPdfPath);
+                    }
+
+                    using (var pdfDocument = new iText.Kernel.Pdf.PdfDocument(new PdfReader(tempPdfPath), new PdfWriter(outputPdfPath)))
+                    {
+                        var pdfMetadata = pdfDocument.GetDocumentInfo();
+
+                        pdfMetadata.SetTitle(titletb.Text);
+                        pdfMetadata.SetSubject(subjecttb.Text);
+
+                        pdfMetadata.SetAuthor(authortb.Text);
+                        pdfMetadata.SetKeywords(keywordstb.Text);
+                        pdfMetadata.SetCreator("Image Binder");
+
+                        pdfDocument.Close();
+                    }
+
+                    File.Delete(tempPdfPath);
+
+                    CleanUpTempJpegFiles(tempJpegFolder);
+                }
             }
         }
 
@@ -774,7 +816,6 @@ namespace Binder.Tabs
             public string ImageName { get; set; }
             public string ImageExtension { get; set; }
             public long ImageSize { get; set; }
-            public string ActionButton { get; set; }
             public string ImagePath { get; set; }
         }
 
@@ -873,11 +914,14 @@ namespace Binder.Tabs
 
         private void qualityTrackBar_ValueChanged(object sender, EventArgs e)
         {
+
             if (!isLosslessMode)
             {
                 qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
             }
         }
+
+        private int LastTBV = 100;
 
         private void oql_CheckedChanged(object sender, EventArgs e)
         {
@@ -888,15 +932,19 @@ namespace Binder.Tabs
                 qualityLabel.Text = $"Image Compression Quality: Off";
                 trackbarhigh.Enabled = false;
                 trackbarlow.Enabled = false;
+                LastTBV = qualityTrackBar.Value;
+                qualityTrackBar.Value = 100;
             }
             else
             {
-                qualityTrackBar.Enabled = true; 
+                qualityTrackBar.Enabled = true;
                 isLosslessMode = false;
                 qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
                 trackbarhigh.Enabled = true;
                 trackbarlow.Enabled = true;
             }
+            ResizeImageAndShowPreview(currentlyDisplayedImagePath, qualityTrackBar.Value);
+            qualityTrackBar.Value = LastTBV;
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -909,6 +957,26 @@ namespace Binder.Tabs
             {
                 oql.Checked = true;
             }
+        }
+
+        private void titleC_Click(object sender, EventArgs e)
+        {
+            titletb.Focus();
+        }
+
+        private void authorC_Click(object sender, EventArgs e)
+        {
+            authortb.Focus();
+        }
+
+        private void subjectC_Click(object sender, EventArgs e)
+        {
+            subjecttb.Focus();
+        }
+
+        private void keywordsC_Click(object sender, EventArgs e)
+        {
+            keywordstb.Focus();
         }
     }
 }
