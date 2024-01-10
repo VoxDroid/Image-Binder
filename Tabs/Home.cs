@@ -55,10 +55,11 @@ namespace Binder.Tabs
             qualityLabel.Name = "qualityLabel";
         }
 
+
         private void qualityTrackBar_Scroll(object sender, EventArgs e)
         {
             qualityLabel.Text = $"Image Compression Quality: {qualityTrackBar.Value}%";
-
+            
             if (!string.IsNullOrEmpty(currentlyDisplayedImagePath))
             {
                 ResizeImageAndShowPreview(currentlyDisplayedImagePath, qualityTrackBar.Value);
@@ -546,7 +547,15 @@ namespace Binder.Tabs
 
                         ShowImagePreview(imagePath, qualityTrackBar.Value);
                         currentlyDisplayedImagePath = imagePath;
-                        qualityTrackBar.Value = LastTBV;
+                        
+                        if (!isLosslessMode)
+                        {
+                            qualityTrackBar.Value = qualityTrackBar.Value;
+                        }
+                        else
+                        {
+                            qualityTrackBar.Value = LastTBV;
+                        }
                     }
                     else
                     {
