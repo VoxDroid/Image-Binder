@@ -118,11 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="label1.Text" xml:space="preserve">
-    <value>MIT License
-https://github.com/VoxDroid/Image-Binder/blob/master/LICENSE.txt
+    <value>MIT License: https://github.com/VoxDroid/Image-Binder/blob/master/LICENSE.txt
 
 Description:
-Image Binder simplifies the image-to-PDF game. It offers compression, sorting, drag-and-drop, directory selection, tooltips, always-on-top, metadata tweaks, and progress tracking.
+Image Binder simplifies the image-to-PDF game. It offers compression, sorting, drag-and-drop, directory selection, tooltips, always-on-top, metadata tweaks, and progress tracking, to your image-to-pdf binding needs.
 
 For support or inquiries, please connect with me on GitHub:
 GitHub: https://github.com/VoxDroid

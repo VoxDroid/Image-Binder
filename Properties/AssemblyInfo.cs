@@ -7,18 +7,18 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Image Binder")]
-[assembly: AssemblyDescription("A tool to bind images into a pdf file.")]
+[assembly: AssemblyDescription("Image Binder simplifies the image-to-PDF game. It offers compression, sorting, drag-and-drop, directory selection, tooltips, always-on-top, metadata tweaks, and progress tracking, to your images-to-pdf binding needs.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Mhar Andrei Macapallag")]
-[assembly: AssemblyProduct("Binder")]
-[assembly: AssemblyCopyright("Copyright ©  2024")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("VoxDroid")]
+[assembly: AssemblyProduct("Image Binder")]
+[assembly: AssemblyCopyright("Copyright © 2024 Image Binder")]
+[assembly: AssemblyTrademark("VD")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
-[assembly: ComVisible(true)]
+[assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("611f018e-0f5a-40b4-abc5-15d31ebf55e8")]
