@@ -187,37 +187,133 @@
     <value>Binder.Tabs.Home, Binder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;home1.Parent" xml:space="preserve">
-    <value>home</value>
+    <value>hometab</value>
   </data>
   <data name="&gt;&gt;home1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="home.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="hometab.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 4</value>
   </data>
-  <data name="home.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="hometab.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="home.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="hometab.Size" type="System.Drawing.Size, System.Drawing">
     <value>1125, 695</value>
   </data>
-  <data name="home.TabIndex" type="System.Int32, mscorlib">
+  <data name="hometab.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="home.Text" xml:space="preserve">
+  <data name="hometab.Text" xml:space="preserve">
     <value>Home</value>
   </data>
-  <data name="&gt;&gt;home.Name" xml:space="preserve">
-    <value>home</value>
+  <data name="&gt;&gt;hometab.Name" xml:space="preserve">
+    <value>hometab</value>
   </data>
-  <data name="&gt;&gt;home.Type" xml:space="preserve">
+  <data name="&gt;&gt;hometab.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;home.Parent" xml:space="preserve">
+  <data name="&gt;&gt;hometab.Parent" xml:space="preserve">
     <value>tabs</value>
   </data>
-  <data name="&gt;&gt;home.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;hometab.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="settingsTab2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="settingsTab2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="settingsTab2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1125, 695</value>
+  </data>
+  <data name="settingsTab2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;settingsTab2.Name" xml:space="preserve">
+    <value>settingsTab2</value>
+  </data>
+  <data name="&gt;&gt;settingsTab2.Type" xml:space="preserve">
+    <value>Binder.Tabs.SettingsTab, Binder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;settingsTab2.Parent" xml:space="preserve">
+    <value>settingstab</value>
+  </data>
+  <data name="&gt;&gt;settingsTab2.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="settingstab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="settingstab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1125, 695</value>
+  </data>
+  <data name="settingstab.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="settingstab.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="&gt;&gt;settingstab.Name" xml:space="preserve">
+    <value>settingstab</value>
+  </data>
+  <data name="&gt;&gt;settingstab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;settingstab.Parent" xml:space="preserve">
+    <value>tabs</value>
+  </data>
+  <data name="&gt;&gt;settingstab.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="aboutTab1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="aboutTab1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="aboutTab1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1125, 695</value>
+  </data>
+  <data name="aboutTab1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;aboutTab1.Name" xml:space="preserve">
+    <value>aboutTab1</value>
+  </data>
+  <data name="&gt;&gt;aboutTab1.Type" xml:space="preserve">
+    <value>Binder.Tabs.AboutTab, Binder, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;aboutTab1.Parent" xml:space="preserve">
+    <value>abouttab</value>
+  </data>
+  <data name="&gt;&gt;aboutTab1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="abouttab.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 4</value>
+  </data>
+  <data name="abouttab.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1125, 695</value>
+  </data>
+  <data name="abouttab.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="abouttab.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="&gt;&gt;abouttab.Name" xml:space="preserve">
+    <value>abouttab</value>
+  </data>
+  <data name="&gt;&gt;abouttab.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;abouttab.Parent" xml:space="preserve">
+    <value>tabs</value>
+  </data>
+  <data name="&gt;&gt;abouttab.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="tabs.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 91</value>
@@ -260,7 +356,7 @@
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFFTeXN0ZW0uRHJhd2luZywgVmVyc2lvbj00LjAuMC4wLCBDdWx0
         dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWIwM2Y1ZjdmMTFkNTBhM2EFAQAAABVTeXN0ZW0uRHJh
-        d2luZy5Qb2ludEYCAAAAAXgBeQAACwsCAAAAAAAAAAAAgD8L
+        d2luZy5Qb2ludEYCAAAAAXgBeQAACwsCAAAAAAAAAAAAAAAL
 </value>
   </data>
   <data name="&gt;&gt;tabs.Name" xml:space="preserve">
@@ -372,7 +468,7 @@
     <value>5</value>
   </data>
   <data name="homebutton.Text" xml:space="preserve">
-    <value>Bind</value>
+    <value>Home</value>
   </data>
   <data name="&gt;&gt;homebutton.Name" xml:space="preserve">
     <value>homebutton</value>
@@ -386,86 +482,59 @@
   <data name="&gt;&gt;homebutton.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="guna2Button2.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="settingsbutton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Poppins, 10pt</value>
   </data>
-  <data name="guna2Button2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="settingsbutton.Location" type="System.Drawing.Point, System.Drawing">
     <value>106, 52</value>
   </data>
-  <data name="guna2Button2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="settingsbutton.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 41</value>
   </data>
-  <data name="guna2Button2.TabIndex" type="System.Int32, mscorlib">
+  <data name="settingsbutton.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="guna2Button2.Text" xml:space="preserve">
-    <value>Other Tabs</value>
+  <data name="settingsbutton.Text" xml:space="preserve">
+    <value>Settings</value>
   </data>
-  <data name="&gt;&gt;guna2Button2.Name" xml:space="preserve">
-    <value>guna2Button2</value>
+  <data name="&gt;&gt;settingsbutton.Name" xml:space="preserve">
+    <value>settingsbutton</value>
   </data>
-  <data name="&gt;&gt;guna2Button2.Type" xml:space="preserve">
+  <data name="&gt;&gt;settingsbutton.Type" xml:space="preserve">
     <value>Guna.UI2.WinForms.Guna2Button, Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
   </data>
-  <data name="&gt;&gt;guna2Button2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;settingsbutton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;guna2Button2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;settingsbutton.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="guna2Button3.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="aboutbutton.Font" type="System.Drawing.Font, System.Drawing">
     <value>Poppins, 10pt</value>
   </data>
-  <data name="guna2Button3.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="aboutbutton.Location" type="System.Drawing.Point, System.Drawing">
     <value>212, 52</value>
   </data>
-  <data name="guna2Button3.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="aboutbutton.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 41</value>
   </data>
-  <data name="guna2Button3.TabIndex" type="System.Int32, mscorlib">
+  <data name="aboutbutton.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="guna2Button3.Text" xml:space="preserve">
-    <value>Other Tabs</value>
+  <data name="aboutbutton.Text" xml:space="preserve">
+    <value>About</value>
   </data>
-  <data name="&gt;&gt;guna2Button3.Name" xml:space="preserve">
-    <value>guna2Button3</value>
+  <data name="&gt;&gt;aboutbutton.Name" xml:space="preserve">
+    <value>aboutbutton</value>
   </data>
-  <data name="&gt;&gt;guna2Button3.Type" xml:space="preserve">
+  <data name="&gt;&gt;aboutbutton.Type" xml:space="preserve">
     <value>Guna.UI2.WinForms.Guna2Button, Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
   </data>
-  <data name="&gt;&gt;guna2Button3.Parent" xml:space="preserve">
+  <data name="&gt;&gt;aboutbutton.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;guna2Button3.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;aboutbutton.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="guna2Button4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Poppins, 10pt</value>
-  </data>
-  <data name="guna2Button4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 52</value>
-  </data>
-  <data name="guna2Button4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 41</value>
-  </data>
-  <data name="guna2Button4.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="guna2Button4.Text" xml:space="preserve">
-    <value>Other Tabs</value>
-  </data>
-  <data name="&gt;&gt;guna2Button4.Name" xml:space="preserve">
-    <value>guna2Button4</value>
-  </data>
-  <data name="&gt;&gt;guna2Button4.Type" xml:space="preserve">
-    <value>Guna.UI2.WinForms.Guna2Button, Guna.UI2, Version=2.0.4.6, Culture=neutral, PublicKeyToken=8b9d14aa5142e261</value>
-  </data>
-  <data name="&gt;&gt;guna2Button4.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;guna2Button4.ZOrder" xml:space="preserve">
-    <value>8</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

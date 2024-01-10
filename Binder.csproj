@@ -325,11 +325,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tabs\AboutTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tabs\AboutTab.Designer.cs">
+      <DependentUpon>AboutTab.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tabs\Home.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Tabs\Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tabs\SettingsTab.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tabs\SettingsTab.Designer.cs">
+      <DependentUpon>SettingsTab.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="BinderWindow.resx">
       <DependentUpon>BinderWindow.cs</DependentUpon>
@@ -346,8 +358,14 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Tabs\AboutTab.resx">
+      <DependentUpon>AboutTab.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tabs\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tabs\SettingsTab.resx">
+      <DependentUpon>SettingsTab.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

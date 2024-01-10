@@ -28,18 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.preview = new Guna.UI2.WinForms.Guna2Panel();
             this.cl = new Guna.UI2.WinForms.Guna2Button();
             this.sf = new Guna.UI2.WinForms.Guna2Button();
             this.dsf = new Guna.UI2.WinForms.Guna2Button();
             this.bind = new Guna.UI2.WinForms.Guna2Button();
-            this.drag = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             this.sfolder = new Guna.UI2.WinForms.Guna2Button();
-            this.borderlessform = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.bo1 = new Guna.UI2.WinForms.Guna2CustomRadioButton();
             this.bindoption1 = new System.Windows.Forms.Label();
@@ -171,11 +168,6 @@
             this.bind.Text = "Bind";
             this.bind.Click += new System.EventHandler(this.BindToPdfButton_Click);
             // 
-            // drag
-            // 
-            this.drag.DockIndicatorTransparencyValue = 0.6D;
-            this.drag.UseTransparentDrag = true;
-            // 
             // sfolder
             // 
             this.sfolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -195,15 +187,6 @@
             this.sfolder.TabIndex = 22;
             this.sfolder.Text = "Select Directory";
             this.sfolder.Click += new System.EventHandler(this.SelectFoldersButton_Click);
-            // 
-            // borderlessform
-            // 
-            this.borderlessform.AnimateWindow = true;
-            this.borderlessform.ContainerControl = this;
-            this.borderlessform.DockForm = false;
-            this.borderlessform.DockIndicatorTransparencyValue = 0.6D;
-            this.borderlessform.ResizeForm = false;
-            this.borderlessform.TransparentWhileDrag = true;
             // 
             // label1
             // 
@@ -372,19 +355,19 @@
             this.imagelist.AllowUserToDeleteRows = false;
             this.imagelist.AllowUserToResizeColumns = false;
             this.imagelist.AllowUserToResizeRows = false;
-            dataGridViewCellStyle25.BackColor = System.Drawing.Color.White;
-            this.imagelist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.imagelist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.imagelist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.imagelist.BackgroundColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle26.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.imagelist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.imagelist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.imagelist.ColumnHeadersHeight = 28;
             this.imagelist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.imageid,
@@ -393,14 +376,14 @@
             this.imagesize,
             this.imagepath});
             this.imagelist.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle27.BackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle27.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.Aqua;
-            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.imagelist.DefaultCellStyle = dataGridViewCellStyle27;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Aqua;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.imagelist.DefaultCellStyle = dataGridViewCellStyle3;
             this.imagelist.GridColor = System.Drawing.Color.DarkGray;
             this.imagelist.Location = new System.Drawing.Point(11, 435);
             this.imagelist.Name = "imagelist";
@@ -409,8 +392,10 @@
             this.imagelist.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.imagelist.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.DarkGray;
             this.imagelist.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.imagelist.ShowCellToolTips = false;
             this.imagelist.Size = new System.Drawing.Size(757, 242);
             this.imagelist.TabIndex = 16;
+            this.imagelist.TabStop = false;
             this.imagelist.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.imagelist.ThemeStyle.AlternatingRowsStyle.Font = null;
             this.imagelist.ThemeStyle.AlternatingRowsStyle.ForeColor = System.Drawing.Color.Empty;
@@ -432,9 +417,11 @@
             this.imagelist.ThemeStyle.RowsStyle.Height = 22;
             this.imagelist.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.imagelist.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.tooltip.SetToolTip(this.imagelist, "You can drag and drop files or folders onto the image list.");
             this.imagelist.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.imagelist_CellClick);
             this.imagelist.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.imagelist_CellDoubleClick);
             this.imagelist.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.imagelist_CellFormatting);
+            this.imagelist.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.imagelist_CellMouseEnter);
             this.imagelist.DragDrop += new System.Windows.Forms.DragEventHandler(this.imagelist_DragDrop);
             this.imagelist.DragEnter += new System.Windows.Forms.DragEventHandler(this.imagelist_DragEnter);
             // 
@@ -528,6 +515,7 @@
             // oql
             // 
             this.oql.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.oql.Animated = true;
             this.oql.BackColor = System.Drawing.Color.Transparent;
             this.oql.Checked = true;
             this.oql.CheckedState.BorderColor = System.Drawing.Color.Teal;
@@ -794,8 +782,10 @@
             this.Controls.Add(this.bind);
             this.Controls.Add(this.imagelist);
             this.Controls.Add(this.sfolder);
+            this.DoubleBuffered = true;
             this.Name = "Home";
             this.Size = new System.Drawing.Size(1117, 688);
+            this.Enter += new System.EventHandler(this.Home_Enter);
             ((System.ComponentModel.ISupportInitialize)(this.imagelist)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -808,9 +798,7 @@
         private Guna.UI2.WinForms.Guna2Button sf;
         private Guna.UI2.WinForms.Guna2Button dsf;
         private Guna.UI2.WinForms.Guna2Button bind;
-        private Guna.UI2.WinForms.Guna2DragControl drag;
         private Guna.UI2.WinForms.Guna2Button sfolder;
-        private Guna.UI2.WinForms.Guna2BorderlessForm borderlessform;
         private System.Windows.Forms.Label label1;
         private Guna.UI2.WinForms.Guna2CustomRadioButton bo1;
         private System.Windows.Forms.Label bindoption1;

@@ -11,6 +11,7 @@ using System.Drawing.Imaging;
 using ImageMagick;
 using iText.Kernel.Pdf;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using iText.IO.Image;
 
 namespace Binder.Tabs
 {
@@ -39,6 +40,45 @@ namespace Binder.Tabs
                 qualityLabel.Text = $"Image Compression Quality: Off";
                 trackbarhigh.Enabled = false;
                 trackbarlow.Enabled = false;
+            }
+        }
+
+        private void ToolTips()
+        {
+            tooltip.SetToolTip(label4, "Metadata properties are optional. Click here to clear the prompts.");
+            tooltip.SetToolTip(label3, "Lossless Mode: No compression is used, and the original quality is retained at the expense of performance and file size.");
+            tooltip.SetToolTip(qualityLabel, "Image Compression Mode: You can choose the quality of the output PDF file using the slider.");
+            tooltip.SetToolTip(preview, "Double-click here to open the original image file.");
+            tooltip.SetToolTip(bindoption1, "The order of the images inside the output PDF file will be based on the order in which you inserted the images in the list.");
+            tooltip.SetToolTip(bindoption2, "The order of the images inside the output PDF file will be based on the image names.");
+            tooltip.SetToolTip(sfolder, "You can select a directory or folders. It will automatically detect and include all images from every subfolder.");
+            tooltip.SetToolTip(sf, "You can select multiple files.");
+            tooltip.SetToolTip(cl, "Clears the images from the list.");
+            tooltip.SetToolTip(dsf, "Clears all selected items. You can select multiple items by holding down your mouse button.");
+            tooltip.SetToolTip(label4, "Metadata properties are optional. Click here to clear the prompts.");
+            tooltip.SetToolTip(abort, "Aborts the binding process.");
+            tooltip.SetToolTip(bind, "Binds all the images in the list into a PDF file.");
+            tooltip.SetToolTip(titletb, "The title of the PDF file.");
+            tooltip.SetToolTip(authortb, "The author of the PDF file.");
+            tooltip.SetToolTip(subjecttb, "The subject of your PDF file.");
+            tooltip.SetToolTip(keywordstb, "The keywords of your PDF file.");
+            tooltip.SetToolTip(progressBar, "Shows the total number of images to bind and the progress of the binding process.");
+            tooltip.SetToolTip(imagelist, "You can drag and drop files or folders onto the image list.");
+
+            foreach (DataGridViewRow row in imagelist.Rows)
+            {
+                if (row.Cells["ImagePath"].Value != null)
+                {
+                    row.Cells["ImagePath"].ToolTipText = row.Cells["ImagePath"].Value.ToString();
+                }
+            }
+        }
+
+        private void RemoveAllToolTips()
+        {
+            foreach (Control control in this.Controls)
+            {
+                tooltip.SetToolTip(control, string.Empty);
             }
         }
 
@@ -1040,6 +1080,50 @@ namespace Binder.Tabs
             {
                 textBox.PlaceholderForeColor = Color.FromArgb(193, 200, 207);
             }
+        }
+
+        private void Home_Enter(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.ShowToolTips == true)
+            {
+                ToolTips();
+            }
+            else
+            {
+                RemoveAllToolTips();
+            }
+        }
+
+        private void imagelist_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (Properties.Settings.Default.ShowToolTips)
+            {
+                if (imagelist.RowCount > 0 && e.RowIndex >= 0 && e.ColumnIndex >= 0)
+                {
+                    DataGridViewCell cell = imagelist.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    string imagePath = cell.OwningRow.Cells["ImagePath"].Value?.ToString();
+
+                    if (!string.IsNullOrEmpty(imagePath) && Properties.Settings.Default.ShowToolTips)
+                    {
+                        tooltip.SetToolTip(imagelist, imagePath + ": Double-click the item to open the folder directory.");
+                    }
+                    else
+                    {
+                        tooltip.SetToolTip(imagelist, string.Empty);
+                    }
+                }
+                else
+                {
+                    tooltip.SetToolTip(imagelist, "You can drag and drop files or folders onto the image list.");
+                }
+            }
+            else
+            {
+
+                tooltip.SetToolTip(imagelist, string.Empty);
+            }
+            
         }
     }
 }
