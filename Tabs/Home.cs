@@ -45,7 +45,7 @@ namespace Binder.Tabs
         {
             qualityTrackBar.Minimum = 1;
             qualityTrackBar.Maximum = 100;
-            qualityTrackBar.Value = 100; 
+            qualityTrackBar.Value = 80; 
             qualityTrackBar.Name = "qualityTrackBar";
             qualityTrackBar.Scroll += qualityTrackBar_Scroll;
             oql.CheckedChanged += oql_CheckedChanged;
@@ -459,6 +459,10 @@ namespace Binder.Tabs
             trackbarhigh.Enabled = false;
             bindoption1.Enabled = false;
             bindoption2.Enabled = false;
+            titletb.Enabled = false;
+            authortb.Enabled = false;
+            subjecttb.Enabled = false;
+            keywordstb.Enabled = false;
         }
 
         private void EnableButtons()
@@ -485,6 +489,11 @@ namespace Binder.Tabs
             }
             bindoption1.Enabled = true;
             bindoption2.Enabled = true;
+
+            titletb.Enabled = true;
+            authortb.Enabled = true;
+            subjecttb.Enabled = true;
+            keywordstb.Enabled = true;
         }
 
         private void imagelist_DragEnter(object sender, DragEventArgs e)
@@ -921,7 +930,7 @@ namespace Binder.Tabs
             }
         }
 
-        private int LastTBV = 100;
+        private int LastTBV = 80;
 
         private void oql_CheckedChanged(object sender, EventArgs e)
         {
