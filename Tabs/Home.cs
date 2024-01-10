@@ -10,6 +10,7 @@ using PdfSharp.Drawing;
 using System.Drawing.Imaging;
 using ImageMagick;
 using iText.Kernel.Pdf;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Binder.Tabs
 {
@@ -986,6 +987,50 @@ namespace Binder.Tabs
         private void keywordsC_Click(object sender, EventArgs e)
         {
             keywordstb.Focus();
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+            titletb.Text = string.Empty;
+            authortb.Text = string.Empty;
+            subjecttb.Text = string.Empty;
+            keywordstb.Text = string.Empty;
+        }
+
+        private void imagelist_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.RowIndex < imagelist.Rows.Count)
+            {
+                DataGridViewRow selectedRow = imagelist.Rows[e.RowIndex];
+                string filePath = selectedRow.Cells["ImagePath"].Value.ToString();
+
+                string directoryPath = System.IO.Path.GetDirectoryName(filePath);
+
+                try
+                {
+                    System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{filePath}\"");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error opening directory: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void TextBoxHover_MouseHover(object sender, EventArgs e)
+        {
+            if (sender is Guna.UI2.WinForms.Guna2TextBox textBox)
+            {
+                textBox.PlaceholderForeColor = Color.FromArgb(0, 192, 192);
+            }
+        }
+
+        private void TextBoxHover_MouseLeave(object sender, EventArgs e)
+        {
+            if (sender is Guna.UI2.WinForms.Guna2TextBox textBox)
+            {
+                textBox.PlaceholderForeColor = Color.FromArgb(193, 200, 207);
+            }
         }
     }
 }

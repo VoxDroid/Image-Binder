@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
             this.preview = new Guna.UI2.WinForms.Guna2Panel();
             this.cl = new Guna.UI2.WinForms.Guna2Button();
             this.sf = new Guna.UI2.WinForms.Guna2Button();
@@ -70,6 +70,7 @@
             this.keywordstb = new Guna.UI2.WinForms.Guna2TextBox();
             this.subjectC = new System.Windows.Forms.Label();
             this.subjecttb = new Guna.UI2.WinForms.Guna2TextBox();
+            this.tooltip = new Guna.UI2.WinForms.Guna2HtmlToolTip();
             ((System.ComponentModel.ISupportInitialize)(this.imagelist)).BeginInit();
             this.SuspendLayout();
             // 
@@ -102,6 +103,7 @@
             this.cl.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.cl.Font = new System.Drawing.Font("Poppins", 10F);
             this.cl.ForeColor = System.Drawing.Color.White;
+            this.cl.HoverState.ForeColor = System.Drawing.Color.Aqua;
             this.cl.Location = new System.Drawing.Point(774, 581);
             this.cl.Name = "cl";
             this.cl.Size = new System.Drawing.Size(162, 45);
@@ -121,6 +123,7 @@
             this.sf.FillColor = System.Drawing.Color.Teal;
             this.sf.Font = new System.Drawing.Font("Poppins", 10F);
             this.sf.ForeColor = System.Drawing.Color.White;
+            this.sf.HoverState.ForeColor = System.Drawing.Color.Aqua;
             this.sf.Location = new System.Drawing.Point(942, 530);
             this.sf.Name = "sf";
             this.sf.Size = new System.Drawing.Size(162, 45);
@@ -140,6 +143,7 @@
             this.dsf.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.dsf.Font = new System.Drawing.Font("Poppins", 10F);
             this.dsf.ForeColor = System.Drawing.Color.White;
+            this.dsf.HoverState.ForeColor = System.Drawing.Color.Aqua;
             this.dsf.Location = new System.Drawing.Point(942, 581);
             this.dsf.Name = "dsf";
             this.dsf.Size = new System.Drawing.Size(162, 45);
@@ -159,6 +163,7 @@
             this.bind.FillColor = System.Drawing.Color.Green;
             this.bind.Font = new System.Drawing.Font("Poppins", 10F);
             this.bind.ForeColor = System.Drawing.Color.White;
+            this.bind.HoverState.ForeColor = System.Drawing.Color.Aqua;
             this.bind.Location = new System.Drawing.Point(774, 632);
             this.bind.Name = "bind";
             this.bind.Size = new System.Drawing.Size(162, 45);
@@ -183,6 +188,7 @@
             this.sfolder.FillColor = System.Drawing.Color.Teal;
             this.sfolder.Font = new System.Drawing.Font("Poppins", 10F);
             this.sfolder.ForeColor = System.Drawing.Color.White;
+            this.sfolder.HoverState.ForeColor = System.Drawing.Color.Aqua;
             this.sfolder.Location = new System.Drawing.Point(774, 530);
             this.sfolder.Name = "sfolder";
             this.sfolder.Size = new System.Drawing.Size(162, 45);
@@ -218,7 +224,7 @@
             this.bo1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.bo1.CheckedState.BorderThickness = 0;
             this.bo1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.bo1.CheckedState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.bo1.CheckedState.InnerColor = System.Drawing.Color.Aqua;
             this.bo1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bo1.Location = new System.Drawing.Point(786, 493);
             this.bo1.Name = "bo1";
@@ -227,7 +233,7 @@
             this.bo1.Text = "guna2CustomRadioButton1";
             this.bo1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.bo1.UncheckedState.BorderThickness = 2;
-            this.bo1.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.bo1.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.bo1.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             this.bo1.CheckedChanged += new System.EventHandler(this.bo1_CheckedChanged);
             // 
@@ -264,7 +270,7 @@
             this.bo2.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.bo2.CheckedState.BorderThickness = 0;
             this.bo2.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.bo2.CheckedState.InnerColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.bo2.CheckedState.InnerColor = System.Drawing.Color.Aqua;
             this.bo2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.bo2.Location = new System.Drawing.Point(954, 493);
             this.bo2.Name = "bo2";
@@ -273,7 +279,7 @@
             this.bo2.Text = "guna2CustomRadioButton2";
             this.bo2.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.bo2.UncheckedState.BorderThickness = 2;
-            this.bo2.UncheckedState.FillColor = System.Drawing.Color.Transparent;
+            this.bo2.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.bo2.UncheckedState.InnerColor = System.Drawing.Color.Transparent;
             this.bo2.CheckedChanged += new System.EventHandler(this.bo2_CheckedChanged);
             // 
@@ -309,6 +315,7 @@
             this.abort.FillColor = System.Drawing.Color.Maroon;
             this.abort.Font = new System.Drawing.Font("Poppins", 10F);
             this.abort.ForeColor = System.Drawing.Color.White;
+            this.abort.HoverState.ForeColor = System.Drawing.Color.Aqua;
             this.abort.Location = new System.Drawing.Point(942, 632);
             this.abort.Name = "abort";
             this.abort.Size = new System.Drawing.Size(162, 45);
@@ -365,19 +372,19 @@
             this.imagelist.AllowUserToDeleteRows = false;
             this.imagelist.AllowUserToResizeColumns = false;
             this.imagelist.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.imagelist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle25.BackColor = System.Drawing.Color.White;
+            this.imagelist.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle25;
             this.imagelist.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.imagelist.BackgroundColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.imagelist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle26.Font = new System.Drawing.Font("Poppins", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle26.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle26.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle26.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle26.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.imagelist.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle26;
             this.imagelist.ColumnHeadersHeight = 28;
             this.imagelist.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.imageid,
@@ -386,14 +393,14 @@
             this.imagesize,
             this.imagepath});
             this.imagelist.Cursor = System.Windows.Forms.Cursors.Hand;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.DarkGray;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Gray;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.imagelist.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle27.BackColor = System.Drawing.Color.DarkGray;
+            dataGridViewCellStyle27.Font = new System.Drawing.Font("Poppins", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            dataGridViewCellStyle27.SelectionBackColor = System.Drawing.Color.Gray;
+            dataGridViewCellStyle27.SelectionForeColor = System.Drawing.Color.Aqua;
+            dataGridViewCellStyle27.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.imagelist.DefaultCellStyle = dataGridViewCellStyle27;
             this.imagelist.GridColor = System.Drawing.Color.DarkGray;
             this.imagelist.Location = new System.Drawing.Point(11, 435);
             this.imagelist.Name = "imagelist";
@@ -426,15 +433,17 @@
             this.imagelist.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.imagelist.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             this.imagelist.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.imagelist_CellClick);
+            this.imagelist.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.imagelist_CellDoubleClick);
             this.imagelist.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.imagelist_CellFormatting);
             this.imagelist.DragDrop += new System.Windows.Forms.DragEventHandler(this.imagelist_DragDrop);
             this.imagelist.DragEnter += new System.Windows.Forms.DragEventHandler(this.imagelist_DragEnter);
             // 
             // guna2VScrollBar1
             // 
-            this.guna2VScrollBar1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2VScrollBar1.BackColor = System.Drawing.Color.DarkGray;
             this.guna2VScrollBar1.BindingContainer = this.imagelist;
-            this.guna2VScrollBar1.FillColor = System.Drawing.Color.Transparent;
+            this.guna2VScrollBar1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.guna2VScrollBar1.HoverState.ThumbColor = System.Drawing.Color.Teal;
             this.guna2VScrollBar1.InUpdate = false;
             this.guna2VScrollBar1.LargeChange = 10;
             this.guna2VScrollBar1.Location = new System.Drawing.Point(758, 435);
@@ -521,10 +530,10 @@
             this.oql.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.oql.BackColor = System.Drawing.Color.Transparent;
             this.oql.Checked = true;
-            this.oql.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.oql.CheckedState.BorderColor = System.Drawing.Color.Teal;
             this.oql.CheckedState.BorderRadius = 2;
             this.oql.CheckedState.BorderThickness = 0;
-            this.oql.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.oql.CheckedState.FillColor = System.Drawing.Color.Teal;
             this.oql.Location = new System.Drawing.Point(845, 133);
             this.oql.Name = "oql";
             this.oql.Size = new System.Drawing.Size(20, 20);
@@ -553,6 +562,7 @@
             // label4
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.label4.Font = new System.Drawing.Font("Poppins", 14F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label4.Location = new System.Drawing.Point(774, 197);
@@ -561,6 +571,7 @@
             this.label4.TabIndex = 39;
             this.label4.Text = "Metadata Properties";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // titletb
             // 
@@ -586,6 +597,8 @@
             this.titletb.SelectedText = "";
             this.titletb.Size = new System.Drawing.Size(162, 36);
             this.titletb.TabIndex = 43;
+            this.titletb.MouseEnter += new System.EventHandler(this.TextBoxHover_MouseHover);
+            this.titletb.MouseLeave += new System.EventHandler(this.TextBoxHover_MouseLeave);
             // 
             // titleC
             // 
@@ -641,6 +654,8 @@
             this.authortb.SelectedText = "";
             this.authortb.Size = new System.Drawing.Size(162, 36);
             this.authortb.TabIndex = 45;
+            this.authortb.MouseEnter += new System.EventHandler(this.TextBoxHover_MouseHover);
+            this.authortb.MouseLeave += new System.EventHandler(this.TextBoxHover_MouseLeave);
             // 
             // keywordsC
             // 
@@ -681,6 +696,8 @@
             this.keywordstb.SelectedText = "";
             this.keywordstb.Size = new System.Drawing.Size(162, 36);
             this.keywordstb.TabIndex = 49;
+            this.keywordstb.MouseEnter += new System.EventHandler(this.TextBoxHover_MouseHover);
+            this.keywordstb.MouseLeave += new System.EventHandler(this.TextBoxHover_MouseLeave);
             // 
             // subjectC
             // 
@@ -721,6 +738,25 @@
             this.subjecttb.SelectedText = "";
             this.subjecttb.Size = new System.Drawing.Size(162, 36);
             this.subjecttb.TabIndex = 47;
+            this.subjecttb.MouseEnter += new System.EventHandler(this.TextBoxHover_MouseHover);
+            this.subjecttb.MouseLeave += new System.EventHandler(this.TextBoxHover_MouseLeave);
+            // 
+            // tooltip
+            // 
+            this.tooltip.AllowLinksHandling = true;
+            this.tooltip.AutoPopDelay = 500000000;
+            this.tooltip.BorderColor = System.Drawing.Color.White;
+            this.tooltip.Font = new System.Drawing.Font("Poppins", 12F);
+            this.tooltip.ForeColor = System.Drawing.Color.Teal;
+            this.tooltip.InitialDelay = 500;
+            this.tooltip.MaximumSize = new System.Drawing.Size(0, 0);
+            this.tooltip.ReshowDelay = 100;
+            this.tooltip.ShowAlways = true;
+            this.tooltip.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            this.tooltip.TitleFont = new System.Drawing.Font("Poppins", 9F, System.Drawing.FontStyle.Bold);
+            this.tooltip.TitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.tooltip.ToolTipTitle = "Image Binder";
+            this.tooltip.UseGdiPlusTextRendering = true;
             // 
             // Home
             // 
@@ -805,5 +841,6 @@
         private Guna.UI2.WinForms.Guna2TextBox keywordstb;
         private System.Windows.Forms.Label subjectC;
         private Guna.UI2.WinForms.Guna2TextBox subjecttb;
+        private Guna.UI2.WinForms.Guna2HtmlToolTip tooltip;
     }
 }

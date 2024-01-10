@@ -38,13 +38,13 @@
             this.guna2ControlBox3 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.tabs = new Bunifu.UI.WinForms.BunifuPages();
             this.home = new System.Windows.Forms.TabPage();
-            this.home1 = new Binder.Tabs.Home();
             this.homebutton = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button4 = new Guna.UI2.WinForms.Guna2Button();
             this.imagebinderIB = new Guna.UI2.WinForms.Guna2PictureBox();
             this.drag2 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
+            this.home1 = new Binder.Tabs.Home();
             this.tabs.SuspendLayout();
             this.home.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imagebinderIB)).BeginInit();
@@ -125,33 +125,29 @@
             // 
             // home
             // 
-            resources.ApplyResources(this.home, "home");
             this.home.BackColor = System.Drawing.Color.Silver;
             this.home.Controls.Add(this.home1);
+            resources.ApplyResources(this.home, "home");
             this.home.Name = "home";
-            // 
-            // home1
-            // 
-            resources.ApplyResources(this.home1, "home1");
-            this.home1.BackColor = System.Drawing.Color.Silver;
-            this.home1.Name = "home1";
             // 
             // homebutton
             // 
-            resources.ApplyResources(this.homebutton, "homebutton");
             this.homebutton.Animated = true;
             this.homebutton.BackColor = System.Drawing.Color.Transparent;
             this.homebutton.BorderColor = System.Drawing.Color.Gray;
             this.homebutton.BorderThickness = 2;
             this.homebutton.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
             this.homebutton.Checked = true;
+            this.homebutton.CheckedState.ForeColor = System.Drawing.Color.Aqua;
             this.homebutton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.homebutton.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.homebutton.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.homebutton.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.homebutton.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.homebutton.FillColor = System.Drawing.Color.DarkSlateGray;
+            resources.ApplyResources(this.homebutton, "homebutton");
             this.homebutton.ForeColor = System.Drawing.Color.White;
+            this.homebutton.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.homebutton.Name = "homebutton";
             this.homebutton.PressedColor = System.Drawing.Color.White;
             this.homebutton.UseTransparentBackground = true;
@@ -159,19 +155,21 @@
             // 
             // guna2Button2
             // 
-            resources.ApplyResources(this.guna2Button2, "guna2Button2");
             this.guna2Button2.Animated = true;
             this.guna2Button2.BackColor = System.Drawing.Color.Transparent;
             this.guna2Button2.BorderColor = System.Drawing.Color.Gray;
             this.guna2Button2.BorderThickness = 2;
             this.guna2Button2.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.guna2Button2.CheckedState.ForeColor = System.Drawing.Color.Aqua;
             this.guna2Button2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.guna2Button2.FillColor = System.Drawing.Color.DarkSlateGray;
+            resources.ApplyResources(this.guna2Button2, "guna2Button2");
             this.guna2Button2.ForeColor = System.Drawing.Color.White;
+            this.guna2Button2.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.PressedColor = System.Drawing.Color.White;
             this.guna2Button2.UseTransparentBackground = true;
@@ -179,19 +177,21 @@
             // 
             // guna2Button3
             // 
-            resources.ApplyResources(this.guna2Button3, "guna2Button3");
             this.guna2Button3.Animated = true;
             this.guna2Button3.BackColor = System.Drawing.Color.Transparent;
             this.guna2Button3.BorderColor = System.Drawing.Color.Gray;
             this.guna2Button3.BorderThickness = 2;
             this.guna2Button3.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.guna2Button3.CheckedState.ForeColor = System.Drawing.Color.Aqua;
             this.guna2Button3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.guna2Button3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.guna2Button3.FillColor = System.Drawing.Color.DarkSlateGray;
+            resources.ApplyResources(this.guna2Button3, "guna2Button3");
             this.guna2Button3.ForeColor = System.Drawing.Color.White;
+            this.guna2Button3.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.guna2Button3.Name = "guna2Button3";
             this.guna2Button3.PressedColor = System.Drawing.Color.White;
             this.guna2Button3.UseTransparentBackground = true;
@@ -199,19 +199,21 @@
             // 
             // guna2Button4
             // 
-            resources.ApplyResources(this.guna2Button4, "guna2Button4");
             this.guna2Button4.Animated = true;
             this.guna2Button4.BackColor = System.Drawing.Color.Transparent;
             this.guna2Button4.BorderColor = System.Drawing.Color.Gray;
             this.guna2Button4.BorderThickness = 2;
             this.guna2Button4.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.guna2Button4.CheckedState.ForeColor = System.Drawing.Color.Aqua;
             this.guna2Button4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2Button4.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button4.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.guna2Button4.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.guna2Button4.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
             this.guna2Button4.FillColor = System.Drawing.Color.DarkSlateGray;
+            resources.ApplyResources(this.guna2Button4, "guna2Button4");
             this.guna2Button4.ForeColor = System.Drawing.Color.White;
+            this.guna2Button4.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.guna2Button4.Name = "guna2Button4";
             this.guna2Button4.PressedColor = System.Drawing.Color.White;
             this.guna2Button4.UseTransparentBackground = true;
@@ -219,18 +221,28 @@
             // 
             // imagebinderIB
             // 
-            resources.ApplyResources(this.imagebinderIB, "imagebinderIB");
+            this.imagebinderIB.BackColor = System.Drawing.Color.Transparent;
+            this.imagebinderIB.ErrorImage = global::Binder.Properties.Resources.IMAGE_BINDER_45x45;
             this.imagebinderIB.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.imagebinderIB.Image = global::Binder.Properties.Resources.IMAGE_BINDER_45x45;
             this.imagebinderIB.ImageRotate = 0F;
+            resources.ApplyResources(this.imagebinderIB, "imagebinderIB");
+            this.imagebinderIB.InitialImage = global::Binder.Properties.Resources.IMAGE_BINDER_45x45;
             this.imagebinderIB.Name = "imagebinderIB";
             this.imagebinderIB.TabStop = false;
+            this.imagebinderIB.UseTransparentBackground = true;
             // 
             // drag2
             // 
             this.drag2.DockIndicatorTransparencyValue = 0.6D;
             this.drag2.TargetControl = this.imagebinderIB;
             this.drag2.UseTransparentDrag = true;
+            // 
+            // home1
+            // 
+            this.home1.BackColor = System.Drawing.Color.Silver;
+            resources.ApplyResources(this.home1, "home1");
+            this.home1.Name = "home1";
             // 
             // BinderWindow
             // 
