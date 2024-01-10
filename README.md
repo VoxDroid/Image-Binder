@@ -2,7 +2,7 @@
 
 <br/>
 <div align="center">
-  <img width="500px" src="https://github.com/VoxDroid/Image-Binder/blob/master/Resources/IMAGE%20BINDER%20-%20ABOUT.png">
+  <img width="1280px" src="https://github.com/VoxDroid/Image-Binder/blob/master/Resources/IMAGE%20BINDER%20(1280%20x%20640%20px).png">
 </div>
 <br/>
 
