@@ -117,4 +117,33 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label1.Text" xml:space="preserve">
+    <value>MIT License
+https://github.com/VoxDroid/Image-Binder/blob/master/LICENSE.txt
+
+Description:
+Image Binder simplifies the image-to-PDF game. It offers compression, sorting, drag-and-drop, directory selection, tooltips, always-on-top, metadata tweaks, and progress tracking.
+
+For support or inquiries, please connect with me on GitHub:
+GitHub: https://github.com/VoxDroid
+
+All icons used in this application were created by me ofc.
+
+Third-Party Libraries:
+This application utilizes the following third-party libraries: - Guna UI Framework, Bunifu UI Framework, PdfSharp, iText 7
+
+License:
+This software is licensed under the terms of the MIT License. See the LICENSE file for details.
+
+Acknowledgments:
+Thanks to Guna, Bunifu, PdfSharp, iText 7, and other open-source contributors.
+
+Legal Information:
+Image Binder is provided "as is" without warranty of any kind, express or implied.
+
+</value>
+  </data>
+  <metadata name="tooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
