@@ -1,4 +1,8 @@
-# Image Binder
+<h1 align="center">Image Binder</h1>
+
+<p align="center">
+📒 Images-To-PDF Conversion 📒
+</p>
 
 <br/>
 <div align="center">
