@@ -6,7 +6,7 @@
 
 <br/>
 <div align="center">
-  <img width="1280px" src="https://github.com/VoxDroid/Image-Binder/blob/master/Resources/IMAGE%20BINDER%20(1280%20x%20640%20px).png">
+  <img width="1280px" src="https://raw.githubusercontent.com/VoxDroid/Image-Binder/master/Resources/IMAGE%20BINDER%20(1280%20x%20640%20px).png">
 </div>
 <br/>
 
@@ -67,6 +67,6 @@ Welcome to Image Binder, a versatile application crafted for effortlessly conver
 
 <br/>
 <div align="center">
-  <img src="https://github.com/VoxDroid/Image-Binder/blob/master/Resources/ImageBinder.PNG">
+  <img src="https://raw.githubusercontent.com/VoxDroid/Image-Binder/master/Resources/ImageBinder.PNG">
 </div>
 <br/>
