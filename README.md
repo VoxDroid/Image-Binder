@@ -18,6 +18,12 @@
     <img alt="License" src="https://img.shields.io/github/license/VoxDroid/Image-Binder?style=flat-square&svg=true">
 </div>
 
+<p align="center">
+  <a href="https://ko-fi.com/O4O6LO7Q1" target="_blank">
+    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" style="border: 0;">
+  </a>
+</p>
+
 ## Introduction
 
 Welcome to Image Binder, a versatile application crafted for effortlessly converting and binding multiple images into a single PDF document. Whether you're organizing your image collection or creating professional portfolios, this tool provides a seamless solution with features designed to enhance your experience.
