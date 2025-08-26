@@ -206,12 +206,12 @@
     <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
-    <Reference Include="Magick.NET-Q16-x64, Version=14.7.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec">
-      <HintPath>packages\Magick.NET-Q16-x64.14.7.0\lib\netstandard20\Magick.NET-Q16-x64.dll</HintPath>
+    <Reference Include="Magick.NET-Q16-x64, Version=14.8.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec">
+      <HintPath>packages\Magick.NET-Q16-x64.14.8.0\lib\netstandard20\Magick.NET-Q16-x64.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Magick.NET.Core, Version=14.7.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec">
-      <HintPath>packages\Magick.NET.Core.14.7.0\lib\netstandard20\Magick.NET.Core.dll</HintPath>
+    <Reference Include="Magick.NET.Core, Version=14.8.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec">
+      <HintPath>packages\Magick.NET.Core.14.8.1\lib\netstandard20\Magick.NET.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -439,8 +439,10 @@
     <Error Condition="!Exists('packages\SixLabors.ImageSharp.3.1.2\build\SixLabors.ImageSharp.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\SixLabors.ImageSharp.3.1.2\build\SixLabors.ImageSharp.props'))" />
     <Error Condition="!Exists('packages\Magick.NET-Q16-x64.13.5.0\build\netstandard20\Magick.NET-Q16-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Magick.NET-Q16-x64.13.5.0\build\netstandard20\Magick.NET-Q16-x64.targets'))" />
     <Error Condition="!Exists('packages/Magick.NET-Q16-x64.14.7.0/build/netstandard20/Magick.NET-Q16-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages/Magick.NET-Q16-x64.14.7.0/build/netstandard20/Magick.NET-Q16-x64.targets'))" />
+    <Error Condition="!Exists('packages/Magick.NET-Q16-x64.14.8.0/build/netstandard20/Magick.NET-Q16-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages/Magick.NET-Q16-x64.14.8.0/build/netstandard20/Magick.NET-Q16-x64.targets'))" />
   </Target>
   <Import Project="packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
   <Import Project="packages\Magick.NET-Q16-x64.13.5.0\build\netstandard20\Magick.NET-Q16-x64.targets" Condition="Exists('packages\Magick.NET-Q16-x64.13.5.0\build\netstandard20\Magick.NET-Q16-x64.targets')" />
   <Import Project="packages/Magick.NET-Q16-x64.14.7.0/build/netstandard20/Magick.NET-Q16-x64.targets" Condition="Exists('packages/Magick.NET-Q16-x64.14.7.0/build/netstandard20/Magick.NET-Q16-x64.targets')" />
+  <Import Project="packages/Magick.NET-Q16-x64.14.8.0/build/netstandard20/Magick.NET-Q16-x64.targets" Condition="Exists('packages/Magick.NET-Q16-x64.14.8.0/build/netstandard20/Magick.NET-Q16-x64.targets')" />
 </Project>
